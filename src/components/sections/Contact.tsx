@@ -84,11 +84,11 @@ export const Contact: React.FC = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-navy-900 mb-6">
-            Start Your Project Today
+          <h2 className="text-4xl md:text-5xl font-bold text-black-900 mb-6">
+            Start Your <span className="text-primary-orange">Dream Project</span> Today
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Ready to bring your vision to life? Get in touch with our team for a free consultation and detailed project quote.
+            Ready to bring your vision to life? Get in touch with our team for a <span className="text-secondary-orange font-bold">free consultation</span> and detailed project quote.
           </p>
         </motion.div>
       </div>
@@ -102,14 +102,14 @@ export const Contact: React.FC = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-2xl font-bold text-navy-900 mb-8">Get in Touch</h3>
+            <h3 className="text-2xl font-bold text-black-900 mb-8">Get in <span className="text-primary-orange">Touch</span></h3>
             
             <div className="space-y-6">
               <div className="flex items-start group">
-                <PhoneIcon className="w-6 h-6 text-gold-500 mr-4 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform" />
+                <PhoneIcon className="w-6 h-6 text-primary-orange mr-4 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform" />
                 <div>
-                  <h4 className="font-semibold text-navy-900 mb-1">Phone</h4>
-                  <a href="tel:+1-555-0123" className="text-gray-600 hover:text-gold-500 transition-colors">
+                  <h4 className="font-bold text-black-900 mb-1">Phone</h4>
+                  <a href="tel:+1-555-0123" className="text-gray-600 hover:text-primary-orange transition-colors">
                     (555) 123-4567
                   </a>
                   <p className="text-sm text-gray-500">Mon-Fri 8AM-6PM</p>
@@ -117,10 +117,10 @@ export const Contact: React.FC = () => {
               </div>
               
               <div className="flex items-start group">
-                <EnvelopeIcon className="w-6 h-6 text-gold-500 mr-4 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform" />
+                <EnvelopeIcon className="w-6 h-6 text-primary-orange mr-4 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform" />
                 <div>
-                  <h4 className="font-semibold text-navy-900 mb-1">Email</h4>
-                  <a href="mailto:info@eliteconstruction.com" className="text-gray-600 hover:text-gold-500 transition-colors">
+                  <h4 className="font-bold text-black-900 mb-1">Email</h4>
+                  <a href="mailto:info@eliteconstruction.com" className="text-gray-600 hover:text-primary-orange transition-colors">
                     info@eliteconstruction.com
                   </a>
                   <p className="text-sm text-gray-500">We'll respond within 24 hours</p>
@@ -128,18 +128,18 @@ export const Contact: React.FC = () => {
               </div>
               
               <div className="flex items-start group">
-                <MapPinIcon className="w-6 h-6 text-gold-500 mr-4 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform" />
+                <MapPinIcon className="w-6 h-6 text-primary-orange mr-4 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform" />
                 <div>
-                  <h4 className="font-semibold text-navy-900 mb-1">Office</h4>
+                  <h4 className="font-bold text-black-900 mb-1">Office</h4>
                   <p className="text-gray-600">123 Construction Ave<br />Los Angeles, CA 90210</p>
                   <p className="text-sm text-gray-500">By appointment only</p>
                 </div>
               </div>
               
               <div className="flex items-start group">
-                <ClockIcon className="w-6 h-6 text-gold-500 mr-4 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform" />
+                <ClockIcon className="w-6 h-6 text-primary-orange mr-4 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform" />
                 <div>
-                  <h4 className="font-semibold text-navy-900 mb-1">Business Hours</h4>
+                  <h4 className="font-bold text-black-900 mb-1">Business Hours</h4>
                   <p className="text-gray-600">Monday - Friday: 8:00 AM - 6:00 PM</p>
                   <p className="text-gray-600">Saturday: 9:00 AM - 4:00 PM</p>
                   <p className="text-gray-600">Sunday: Closed</p>
@@ -149,11 +149,11 @@ export const Contact: React.FC = () => {
 
             {/* Emergency Contact */}
             <div className="mt-8 p-6 bg-red-50 rounded-lg border border-red-200">
-              <h4 className="font-semibold text-red-900 mb-2">Emergency Contact</h4>
+              <h4 className="font-bold text-red-900 mb-2">Emergency Contact</h4>
               <p className="text-red-700 text-sm mb-2">
                 For existing project emergencies only
               </p>
-              <a href="tel:+1-555-0124" className="font-semibold text-red-900 hover:text-red-700 transition-colors">
+              <a href="tel:+1-555-0124" className="font-bold text-red-900 hover:text-red-700 transition-colors">
                 (555) 123-HELP
               </a>
             </div>
@@ -168,37 +168,37 @@ export const Contact: React.FC = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <Card className="p-8">
+            <Card className="p-8 border border-gray-200 hover:border-primary-orange/30 hover:shadow-orange-glow transition-all duration-300">
               {isSubmitted ? (
                 <div className="text-center py-12">
                   <CheckCircleIcon className="w-16 h-16 text-green-500 mx-auto mb-4" />
-                  <h3 className="text-2xl font-bold text-navy-900 mb-4">Thank You!</h3>
+                  <h3 className="text-2xl font-bold text-black-900 mb-4">Thank You!</h3>
                   <p className="text-gray-600 mb-6">
-                    Your quote request has been submitted successfully. Our team will review your project details and contact you within 24 hours.
+                    Your quote request has been submitted successfully. Our team will review your project details and contact you within <span className="text-primary-orange font-bold">24 hours</span>.
                   </p>
                   <p className="text-sm text-gray-500">
-                    For immediate assistance, please call (555) 123-4567
+                    For immediate assistance, please call <span className="text-secondary-orange font-bold">(555) 123-4567</span>
                   </p>
                 </div>
               ) : (
                 <>
                   <div className="mb-8">
-                    <h3 className="text-2xl font-bold text-navy-900 mb-4">Get Your Free Quote</h3>
+                    <h3 className="text-2xl font-bold text-black-900 mb-4">Get Your <span className="text-primary-orange">Free Quote</span></h3>
                     
                     {/* Progress Bar */}
                     <div className="flex items-center mb-6">
                       {[1, 2, 3, 4].map((step) => (
                         <React.Fragment key={step}>
-                          <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-all ${
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all ${
                             step <= currentStep 
-                              ? 'bg-navy-900 text-white scale-110' 
+                              ? 'orange-gradient-bg text-white scale-110 shadow-lg' 
                               : 'bg-gray-200 text-gray-500'
                           }`}>
                             {step}
                           </div>
                           {step < 4 && (
-                            <div className={`flex-1 h-1 mx-2 transition-all ${
-                              step < currentStep ? 'bg-navy-900' : 'bg-gray-200'
+                            <div className={`flex-1 h-1 mx-2 transition-all rounded-full ${
+                              step < currentStep ? 'orange-gradient-bg' : 'bg-gray-200'
                             }`} />
                           )}
                         </React.Fragment>
@@ -206,12 +206,12 @@ export const Contact: React.FC = () => {
                     </div>
                     
                     <div className="text-sm text-gray-600">
-                      Step {currentStep} of 4: {
+                      Step <span className="text-primary-orange font-bold">{currentStep}</span> of 4: <span className="font-medium">{
                         currentStep === 1 ? 'Project Details' :
                         currentStep === 2 ? 'Specifications' :
                         currentStep === 3 ? 'Timeline & Budget' :
                         'Contact Information'
-                      }
+                      }</span>
                     </div>
                   </div>
 
@@ -224,12 +224,12 @@ export const Contact: React.FC = () => {
                         className="space-y-6"
                       >
                         <div>
-                          <label className="block text-sm font-semibold text-gray-700 mb-2">
+                          <label className="block text-sm font-bold text-gray-700 mb-2">
                             Project Type *
                           </label>
                           <select
                             {...register('projectType')}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all"
                           >
                             <option value="">Select project type</option>
                             <option value="custom-home">Custom Home Construction</option>
@@ -246,14 +246,14 @@ export const Contact: React.FC = () => {
                         </div>
 
                         <div>
-                          <label className="block text-sm font-semibold text-gray-700 mb-2">
+                          <label className="block text-sm font-bold text-gray-700 mb-2">
                             Project Location *
                           </label>
                           <input
                             type="text"
                             {...register('location')}
                             placeholder="City, State"
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all"
                           />
                           {errors.location && (
                             <p className="text-red-500 text-sm mt-1">{errors.location.message}</p>
@@ -270,14 +270,14 @@ export const Contact: React.FC = () => {
                         className="space-y-6"
                       >
                         <div>
-                          <label className="block text-sm font-semibold text-gray-700 mb-2">
+                          <label className="block text-sm font-bold text-gray-700 mb-2">
                             Square Footage *
                           </label>
                           <input
                             type="number"
                             {...register('squareFootage')}
                             placeholder="e.g., 2500"
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all"
                           />
                           {errors.squareFootage && (
                             <p className="text-red-500 text-sm mt-1">{errors.squareFootage.message}</p>
@@ -285,12 +285,12 @@ export const Contact: React.FC = () => {
                         </div>
 
                         <div>
-                          <label className="block text-sm font-semibold text-gray-700 mb-2">
+                          <label className="block text-sm font-bold text-gray-700 mb-2">
                             Finish Level *
                           </label>
                           <select
                             {...register('finishLevel')}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all"
                           >
                             <option value="">Select finish level</option>
                             <option value="standard">Standard</option>
@@ -313,12 +313,12 @@ export const Contact: React.FC = () => {
                         className="space-y-6"
                       >
                         <div>
-                          <label className="block text-sm font-semibold text-gray-700 mb-2">
+                          <label className="block text-sm font-bold text-gray-700 mb-2">
                             Desired Timeline *
                           </label>
                           <select
                             {...register('timeline')}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all"
                           >
                             <option value="">Select timeline</option>
                             <option value="asap">ASAP</option>
@@ -333,12 +333,12 @@ export const Contact: React.FC = () => {
                         </div>
 
                         <div>
-                          <label className="block text-sm font-semibold text-gray-700 mb-2">
+                          <label className="block text-sm font-bold text-gray-700 mb-2">
                             Budget Range *
                           </label>
                           <select
                             {...register('budget')}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all"
                           >
                             <option value="">Select budget range</option>
                             <option value="under-100k">Under $100K</option>
@@ -363,14 +363,14 @@ export const Contact: React.FC = () => {
                       >
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           <div>
-                            <label className="block text-sm font-semibold text-gray-700 mb-2">
+                            <label className="block text-sm font-bold text-gray-700 mb-2">
                               Full Name *
                             </label>
                             <input
                               type="text"
                               {...register('name')}
                               placeholder="John Doe"
-                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all"
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all"
                             />
                             {errors.name && (
                               <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
@@ -378,14 +378,14 @@ export const Contact: React.FC = () => {
                           </div>
 
                           <div>
-                            <label className="block text-sm font-semibold text-gray-700 mb-2">
+                            <label className="block text-sm font-bold text-gray-700 mb-2">
                               Phone Number *
                             </label>
                             <input
                               type="tel"
                               {...register('phone')}
                               placeholder="(555) 123-4567"
-                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all"
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all"
                             />
                             {errors.phone && (
                               <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>
@@ -394,14 +394,14 @@ export const Contact: React.FC = () => {
                         </div>
 
                         <div>
-                          <label className="block text-sm font-semibold text-gray-700 mb-2">
+                          <label className="block text-sm font-bold text-gray-700 mb-2">
                             Email Address *
                           </label>
                           <input
                             type="email"
                             {...register('email')}
                             placeholder="john@example.com"
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all"
                           />
                           {errors.email && (
                             <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
@@ -409,14 +409,14 @@ export const Contact: React.FC = () => {
                         </div>
 
                         <div>
-                          <label className="block text-sm font-semibold text-gray-700 mb-2">
+                          <label className="block text-sm font-bold text-gray-700 mb-2">
                             Additional Details
                           </label>
                           <textarea
                             {...register('message')}
                             rows={4}
                             placeholder="Tell us more about your project vision, specific requirements, or any questions you have..."
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all"
                           />
                         </div>
                       </motion.div>
@@ -428,7 +428,7 @@ export const Contact: React.FC = () => {
                         <Button
                           type="button"
                           variant="ghost"
-                          darkBg={true}
+                          darkBg={false}
                           onClick={prevStep}
                         >
                           Previous
@@ -439,8 +439,8 @@ export const Contact: React.FC = () => {
                         {currentStep < 4 ? (
                           <Button
                             type="button"
-                            variant="ghost"
-                            darkBg={true}
+                            variant="secondary"
+                            darkBg={false}
                             onClick={nextStep}
                             disabled={
                               (currentStep === 1 && (!watchedValues.projectType || !watchedValues.location)) ||

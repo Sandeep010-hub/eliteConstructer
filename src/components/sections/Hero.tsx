@@ -51,7 +51,7 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => {
   const navigate = useNavigate();
 
   return (
-    <section className="relative min-h-screen min-h-[500px] flex items-center justify-center overflow-hidden pt-24 pb-12 sm:pt-32 bg-navy-900">
+    <section className="relative min-h-screen min-h-[500px] flex items-center justify-center overflow-hidden pt-24 pb-12 sm:pt-32 black-gradient-bg">
       <Helmet>
         <title>Elite Construction & Design | Custom Homes & Renovations</title>
         <meta name="description" content="Elite Construction & Design builds premium custom homes, renovations, and commercial projects in Southern California. Uncompromising quality, on-time delivery, and client satisfaction." />
@@ -91,12 +91,18 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => {
         className="absolute inset-0 w-full h-full object-cover z-0"
         style={{ objectPosition: 'center 50%' }}
       />
-      {/* Gradient Overlay */}
+      {/* Orange Construction Theme Gradient Overlay */}
       <div
         className="absolute inset-0 w-full h-full z-0"
-        style={{ background: 'linear-gradient(rgba(27, 54, 93, 0.7), rgba(27, 54, 93, 0.5))' }}
+        style={{ background: 'linear-gradient(135deg, rgba(26, 26, 26, 0.85) 0%, rgba(0, 0, 0, 0.7) 50%, rgba(255, 107, 53, 0.1) 100%)' }}
       />
-      <Container className="relative z-10 text-center text-white flex flex-col items-center justify-center w-full max-w-4xl px-4">
+      {/* Orange accent patterns */}
+      <div className="absolute inset-0 opacity-20 z-0">
+        <div className="absolute top-20 right-20 w-32 h-32 bg-primary-orange rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 left-20 w-40 h-40 bg-secondary-orange rounded-full blur-3xl"></div>
+      </div>
+      
+      <Container className="relative z-10 text-center text-white flex flex-col items-center justify-center w-full max-w-5xl px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -107,31 +113,36 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => {
           <div className="text-center">
             <AnimatedHeading
               as="h1"
-              flowColor="#FBBF24"
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light leading-snug text-white drop-shadow-lg mb-8 break-words text-center max-w-full mx-auto px-4"
+              flowColor="#FF6B35"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white text-shadow-dark mb-8 break-words text-center max-w-full mx-auto px-4"
             >
-              Transform Your Vision Into Extraordinary Reality
+              Build Your Dream with Orange Construction Excellence
             </AnimatedHeading>
           </div>
           {/* Subheadline */}
-          <p className="text-xl md:text-2xl mb-10 max-w-2xl mx-auto leading-relaxed font-light text-white/90">
-            Premium construction services with guaranteed results and on-time delivery
+          <p className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto leading-relaxed font-medium text-white/95 text-shadow-dark">
+            Premium construction services with <span className="text-primary-orange font-bold">guaranteed results</span> and <span className="text-secondary-orange font-bold">on-time delivery</span>
           </p>
+          
           {/* Trust Badges */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            <div className="glass px-6 py-3 flex items-center gap-2 text-lg font-semibold shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/30 hover:scale-105 cursor-pointer">
-              <ShieldCheck className="w-5 h-5 text-success-green" /> 15+ Years Experience
+          <div className="flex flex-wrap justify-center gap-6 mb-16">
+            <div className="glass px-8 py-4 flex items-center gap-3 text-lg font-bold shadow-xl hover:shadow-orange-glow transition-all duration-300 border border-white/30 hover:scale-105 cursor-pointer">
+              <ShieldCheck className="w-6 h-6 text-success-green" /> 
+              <span className="text-white">15+ Years Experience</span>
             </div>
-            <div className="glass px-6 py-3 flex items-center gap-2 text-lg font-semibold shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/30 hover:scale-105 cursor-pointer">
-              <Users className="w-5 h-5 text-accent-emerald" /> 500+ Projects Completed
+            <div className="glass px-8 py-4 flex items-center gap-3 text-lg font-bold shadow-xl hover:shadow-orange-glow transition-all duration-300 border border-white/30 hover:scale-105 cursor-pointer">
+              <Users className="w-6 h-6 text-primary-orange" /> 
+              <span className="text-white">500+ Projects Completed</span>
             </div>
-            <div className="glass px-6 py-3 flex items-center gap-2 text-lg font-semibold shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/30 hover:scale-105 cursor-pointer">
-              <Clock className="w-5 h-5 text-warning-amber" /> 98% Client Satisfaction
+            <div className="glass px-8 py-4 flex items-center gap-3 text-lg font-bold shadow-xl hover:shadow-orange-glow transition-all duration-300 border border-white/30 hover:scale-105 cursor-pointer">
+              <Clock className="w-6 h-6 text-secondary-orange" /> 
+              <span className="text-white">98% Client Satisfaction</span>
             </div>
           </div>
+          
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 w-full max-w-2xl mx-auto">
-            <Button size="lg" variant="primary" className="shadow-xl min-w-[220px]" onClick={() => {
+          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12 w-full max-w-3xl mx-auto">
+            <Button size="lg" variant="primary" className="shadow-2xl min-w-[250px] text-lg transform hover:scale-105" onClick={() => {
               if (location.pathname === '/') {
                 const contactSection = document.getElementById('contact');
                 if (contactSection) {
@@ -141,9 +152,9 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => {
                 navigate('/contact', { state: { scrollTo: 'contact' } });
               }
             }}>
-              Get FREE Quote in 24 Hours <ArrowRight className="ml-2 w-5 h-5" />
+              Get FREE Quote in 24 Hours <ArrowRight className="ml-2 w-6 h-6" />
             </Button>
-            <Button size="lg" variant="glass" className="backdrop-blur-md text-white shadow-lg border border-white/30 hover:border-primary-gold hover:shadow-gold-500/40 hover:backdrop-blur-xl hover:bg-white/10 hover:text-primary-gold focus:text-primary-gold focus:border-primary-gold transition-all duration-300 min-w-[220px] text-shadow-lg" onClick={() => {
+            <Button size="lg" variant="glass" className="backdrop-blur-md text-white shadow-xl border-2 border-white/30 hover:border-primary-orange hover:shadow-orange-glow hover:backdrop-blur-xl hover:bg-white/10 hover:text-primary-orange focus:text-primary-orange focus:border-primary-orange transition-all duration-300 min-w-[250px] text-lg text-shadow-dark font-bold" onClick={() => {
               if (location.pathname === '/') {
                 const portfolioSection = document.getElementById('portfolio');
                 if (portfolioSection) {
@@ -156,19 +167,32 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => {
               View Our Premium Projects
             </Button>
           </div>
+          
+          {/* Additional Info */}
+          <div className="text-center">
+            <p className="text-lg text-white/80 mb-4 font-medium">
+              Trusted by homeowners across Southern California
+            </p>
+            <div className="flex justify-center items-center gap-4 text-sm text-white/70">
+              <span className="px-3 py-1 bg-primary-orange/20 rounded-full border border-primary-orange/30">Licensed & Insured</span>
+              <span className="px-3 py-1 bg-secondary-orange/20 rounded-full border border-secondary-orange/30">Free Consultations</span>
+              <span className="px-3 py-1 bg-primary-orange/20 rounded-full border border-primary-orange/30">5-Year Warranty</span>
+            </div>
+          </div>
         </motion.div>
-        {/* Floating Contact Info - sticky on mobile */}
+        
+        {/* Floating Contact Info - Orange themed */}
         <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 sm:bottom-8 sm:right-8">
           <a
             href="tel:+91-XXXXXXXXXX"
-            className={`glass flex flex-row items-center shadow-lg border border-white/30 cursor-pointer transition-all duration-300 overflow-hidden h-14 ${isHovered ? 'px-6 w-[260px] rounded-full' : 'w-14 p-0 rounded-full justify-center'}`}
+            className={`glass flex flex-row items-center shadow-xl border-2 border-primary-orange/30 cursor-pointer transition-all duration-300 overflow-hidden h-16 hover:shadow-orange-glow ${isHovered ? 'px-6 w-[280px] rounded-full bg-primary-orange/10' : 'w-16 p-0 rounded-full justify-center bg-primary-orange/20'}`}
             aria-label="Call phone number"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            <Phone className="w-7 h-7 text-primary-gold transition-all duration-300" />
+            <Phone className="w-8 h-8 text-primary-orange transition-all duration-300" />
             <span
-              className={`ml-3 text-lg font-bold text-primary-gold transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0 w-0 overflow-hidden'}`}
+              className={`ml-3 text-lg font-bold text-primary-orange transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0 w-0 overflow-hidden'}`}
               style={{ transition: 'opacity 0.3s, width 0.3s' }}
             >
               +91-XXXXXXXXXX
