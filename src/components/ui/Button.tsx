@@ -14,11 +14,11 @@ export const Button: React.FC<ButtonProps> = ({
   children,
   ...props
 }) => {
-  const baseClasses = 'inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
+  const baseClasses = 'inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 transform hover:scale-105';
   
   const variantClasses = {
     primary: 'bg-navy-900 text-white hover:bg-navy-800 focus:ring-navy-500 shadow-lg hover:shadow-xl',
-    secondary: 'border-2 border-gold-500 text-navy-900 hover:bg-gold-500 hover:text-white focus:ring-gold-500',
+    secondary: 'border-2 border-gold-500 text-navy-900 hover:bg-gold-500 hover:text-white focus:ring-gold-500 shadow-lg hover:shadow-xl',
     ghost: 'text-navy-900 hover:bg-navy-50 focus:ring-navy-500'
   };
   

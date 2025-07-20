@@ -89,12 +89,7 @@ export const Renovations: React.FC = () => {
               <Button 
                 variant="secondary" 
                 size="lg"
-                onClick={() => {
-                  if (setCurrentPage) {
-                    setCurrentPage('portfolio');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }
-                }}
+                onClick={() => setCurrentPage && setCurrentPage('portfolio')}
               >
                 View Before & After Gallery
               </Button>

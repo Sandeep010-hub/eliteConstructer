@@ -8,7 +8,6 @@ const navigation = [
   { name: 'Services', href: 'services' },
   { name: 'Portfolio', href: 'portfolio' },
   { name: 'About', href: 'about' },
-  { name: 'Blog', href: 'blog' },
   { name: 'Contact', href: 'contact' },
 ];
 
@@ -47,12 +46,12 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) =
   const getTextColor = (isActive = false) => {
     if (isHomePage) {
       if (scrolled) {
-        return isActive ? 'text-navy-900' : 'text-gray-700 hover:text-navy-900';
+        return isActive ? 'text-navy-900 font-bold' : 'text-gray-700 hover:text-navy-900';
       } else {
-        return isActive ? 'text-gold-500' : 'text-white hover:text-gold-500';
+        return isActive ? 'text-gold-500 font-bold' : 'text-white hover:text-gold-500';
       }
     } else {
-      return isActive ? 'text-navy-900' : 'text-gray-700 hover:text-navy-900';
+      return isActive ? 'text-navy-900 font-bold' : 'text-gray-700 hover:text-navy-900';
     }
   };
   
@@ -124,6 +123,24 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) =
     setMobileMenuOpen(false);
   };
 
+  const handleGetQuote = () => {
+    if (currentPage !== 'home') {
+      setCurrentPage('home');
+      setTimeout(() => {
+        const element = document.getElementById('contact');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById('contact');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    setMobileMenuOpen(false);
+  };
+
   return (
     <header className={`fixed w-full z-50 transition-all duration-500 ${getNavbarStyles()}`}>
       <Container>
@@ -137,9 +154,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) =
               <div className={`w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-105 ${
                 getLogoStyles()
               }`}>
-                <span className={`font-bold text-xl transition-colors duration-300 ${
-                  'text-white'
-                }`}>E</span>
+                <span className="text-white font-bold text-xl">E</span>
               </div>
               <div>
                 <div className={`font-bold text-lg transition-colors duration-300 ${
@@ -160,7 +175,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) =
               <button
                 key={item.name}
                 onClick={() => {
-                  if (item.href === 'services' || item.href === 'portfolio' || item.href === 'about' || item.href === 'blog' || item.href === 'contact') {
+                  if (item.href === 'services' || item.href === 'portfolio' || item.href === 'about' || item.href === 'contact') {
                     scrollToSection(item.href);
                   } else {
                     handleNavigation(item.href);
@@ -190,7 +205,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) =
               <span className="font-semibold">(555) 123-4567</span>
             </a>
             <Button 
-              onClick={() => scrollToSection('contact')}
+              onClick={handleGetQuote}
               className={`transition-all duration-300 hover:scale-105 ${getButtonStyles()}`}
             >
               Get Free Quote
@@ -221,7 +236,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) =
                 <button
                   key={item.name}
                   onClick={() => {
-                    if (item.href === 'services' || item.href === 'portfolio' || item.href === 'about' || item.href === 'blog' || item.href === 'contact') {
+                    if (item.href === 'services' || item.href === 'portfolio' || item.href === 'about' || item.href === 'contact') {
                       scrollToSection(item.href);
                     } else {
                       handleNavigation(item.href);
@@ -246,7 +261,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) =
                 </a>
                 <Button 
                   className="w-full"
-                  onClick={() => scrollToSection('contact')}
+                  onClick={handleGetQuote}
                 >
                   Get Free Quote
                 </Button>

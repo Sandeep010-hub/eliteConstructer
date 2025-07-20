@@ -94,12 +94,7 @@ export const CustomHomes: React.FC = () => {
               <Button 
                 variant="secondary" 
                 size="lg"
-                onClick={() => {
-                  if (setCurrentPage) {
-                    setCurrentPage('portfolio');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }
-                }}
+                onClick={() => setCurrentPage && setCurrentPage('portfolio')}
               >
                 View Custom Home Gallery
               </Button>

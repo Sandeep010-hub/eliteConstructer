@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { StarIcon } from '@heroicons/react/24/solid';
 import { Button } from '../ui/Button';
 import { Container } from '../ui/Container';
 
@@ -9,17 +8,37 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => {
-  const handleNavigation = (page: string) => {
+  const handleGetConsultation = () => {
     if (setCurrentPage) {
-      setCurrentPage(page);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setCurrentPage('contact');
+      setTimeout(() => {
+        const element = document.getElementById('contact');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById('contact');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  const handleViewWork = () => {
+    if (setCurrentPage) {
+      setCurrentPage('portfolio');
+      setTimeout(() => {
+        const element = document.getElementById('portfolio');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById('portfolio');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
@@ -41,20 +60,6 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          {/* Trust Indicators */}
-          <div className="flex items-center justify-center space-x-6 mb-8">
-            <div className="flex items-center">
-              <div className="flex">
-                {[...Array(5)].map((_, i) => (
-                  <StarIcon key={i} className="w-5 h-5 text-gold-500" />
-                ))}
-              </div>
-              <span className="ml-2 text-sm font-medium">5.0 Rating</span>
-            </div>
-            <div className="text-sm font-medium">25+ Years Experience</div>
-            <div className="text-sm font-medium">500+ Projects Completed</div>
-          </div>
-
           {/* Main Headline */}
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight">
             <span className="font-serif">Crafting Exceptional</span>
@@ -71,40 +76,16 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => {
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
             <Button 
               size="lg" 
-              className="bg-gold-500 hover:bg-gold-600 text-navy-900 font-bold px-8 py-4 text-lg"
-              onClick={() => {
-                if (setCurrentPage) {
-                  setCurrentPage('contact');
-                  setTimeout(() => {
-                    const element = document.getElementById('contact');
-                    if (element) {
-                      element.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }, 100);
-                } else {
-                  scrollToSection('contact');
-                }
-              }}
+              className="bg-gold-500 hover:bg-gold-600 text-navy-900 font-bold px-8 py-4 text-lg transform hover:scale-110 transition-all duration-300 shadow-2xl hover:shadow-gold-500/25"
+              onClick={handleGetConsultation}
             >
               Get Free Consultation
             </Button>
             <Button 
               variant="ghost" 
               size="lg" 
-              className="text-white border-2 border-white hover:bg-white hover:text-navy-900 px-8 py-4 text-lg"
-              onClick={() => {
-                if (setCurrentPage) {
-                  setCurrentPage('portfolio');
-                  setTimeout(() => {
-                    const element = document.getElementById('portfolio');
-                    if (element) {
-                      element.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }, 100);
-                } else {
-                  scrollToSection('portfolio');
-                }
-              }}
+              className="text-white border-2 border-white hover:bg-white hover:text-navy-900 px-8 py-4 text-lg transform hover:scale-110 transition-all duration-300 shadow-2xl hover:shadow-white/25"
+              onClick={handleViewWork}
             >
               View Our Work
             </Button>

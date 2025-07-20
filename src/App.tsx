@@ -16,8 +16,8 @@ import { Careers } from './components/pages/Careers';
 import { Financing } from './components/pages/Financing';
 import { Privacy } from './components/pages/Privacy';
 import { Terms } from './components/pages/Terms';
-import { Sitemap } from './components/pages/Sitemap';
 import { NotFound } from './components/pages/NotFound';
+import { Blog as BlogPage } from './components/pages/Blog';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -39,33 +39,31 @@ function App() {
       case 'services':
         return <Services setCurrentPage={setCurrentPage} />;
       case 'custom-homes':
-        return <CustomHomes />;
+        return <CustomHomes setCurrentPage={setCurrentPage} />;
       case 'renovations':
-        return <Renovations />;
+        return <Renovations setCurrentPage={setCurrentPage} />;
       case 'commercial':
-        return <Commercial />;
+        return <Commercial setCurrentPage={setCurrentPage} />;
       case 'portfolio':
         return <Portfolio setCurrentPage={setCurrentPage} />;
       case 'about':
         return <About />;
       case 'process':
-        return <Process />;
+        return <Process setCurrentPage={setCurrentPage} />;
       case 'testimonials':
         return <Testimonials />;
       case 'blog':
-        return <Blog />;
+        return <BlogPage setCurrentPage={setCurrentPage} />;
       case 'contact':
         return <Contact />;
       case 'careers':
-        return <Careers />;
+        return <Careers setCurrentPage={setCurrentPage} />;
       case 'financing':
-        return <Financing />;
+        return <Financing setCurrentPage={setCurrentPage} />;
       case 'privacy':
         return <Privacy />;
       case 'terms':
         return <Terms />;
-      case 'sitemap':
-        return <Sitemap setCurrentPage={setCurrentPage} />;
       default:
         return <NotFound setCurrentPage={setCurrentPage} />;
     }

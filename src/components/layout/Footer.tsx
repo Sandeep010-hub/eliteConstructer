@@ -6,8 +6,8 @@ const footerNavigation = {
   services: [
     { name: 'Custom Homes', href: 'custom-homes' },
     { name: 'Renovations', href: 'renovations' },
-    { name: 'Kitchen Remodeling', href: 'services' },
-    { name: 'Bathroom Renovations', href: 'services' },
+    { name: 'Kitchen Remodeling', href: 'renovations' },
+    { name: 'Bathroom Renovations', href: 'renovations' },
     { name: 'Commercial Construction', href: 'commercial' },
   ],
   company: [
@@ -20,8 +20,8 @@ const footerNavigation = {
   resources: [
     { name: 'Blog', href: 'blog' },
     { name: 'Financing', href: 'financing' },
-    { name: 'Warranties', href: 'about' },
-    { name: 'Maintenance Tips', href: 'blog' },
+    { name: 'Process', href: 'process' },
+    { name: 'Contact', href: 'contact' },
   ],
   legal: [
     { name: 'Privacy Policy', href: 'privacy' },
