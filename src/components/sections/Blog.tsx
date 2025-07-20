@@ -4,7 +4,7 @@ import { CalendarIcon, ClockIcon, UserIcon } from '@heroicons/react/24/outline';
 import { Section } from '../ui/Section';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
-import { blogPosts } from '../../data/blog';
+import { blogPosts } from '../data/blog';
 
 export const Blog: React.FC = () => {
   return (
