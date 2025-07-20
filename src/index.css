@@ -5,8 +5,8 @@
 @tailwind utilities;
 
 :root {
-  --primary-gold: #D78320;
-  --dark-navy: #0A1C2B;
+  --primary-orange: #f97316;
+  --dark-navy: #0f172a;
   --success-green: #059669;
   --warning-amber: #F59E0B;
   --neutral-slate: #64748B;
@@ -25,12 +25,16 @@
   border: 1px solid rgba(255,255,255,0.18);
 }
 
-.gradient-gold {
-  background: linear-gradient(90deg, #D78320 0%, #F59E0B 100%);
+.gradient-orange {
+  background: linear-gradient(90deg, #f97316 0%, #ea580c 100%);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
+}
+
+.bg-gradient-orange {
+  background: linear-gradient(90deg, #f97316 0%, #ea580c 100%);
 }
 
 .animate-fade-in { animation: fadeIn 0.3s ease; }

@@ -80,7 +80,7 @@ export const Services: React.FC<ServicesProps> = ({ setCurrentPage }) => {
           viewport={{ once: true }}
         >
           <AnimatedHeading as="h2" className="text-4xl md:text-5xl mb-6 text-navy-900">
-            Our Services
+            The Best Service For You
           </AnimatedHeading>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             From concept to completion, we deliver excellence in every project with uncompromising quality and attention to detail.
@@ -96,8 +96,8 @@ export const Services: React.FC<ServicesProps> = ({ setCurrentPage }) => {
             onClick={() => setActiveCategory(category.id)}
             className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105 ${
               activeCategory === category.id
-                ? 'bg-navy-900 text-white shadow-lg'
-                : 'bg-white text-gray-700 hover:bg-navy-50 border border-gray-200 hover:border-navy-200'
+                ? 'bg-orange-500 text-white shadow-lg'
+                : 'bg-white text-gray-700 hover:bg-orange-50 border border-gray-200 hover:border-orange-200'
             }`}
           >
             {category.name}

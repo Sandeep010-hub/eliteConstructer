@@ -87,14 +87,14 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => {
       {/* Responsive Background Image (object-cover) */}
       <img
         src="https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=1920"
-        alt="Modern custom home"
+        alt="Quality construction workers on site"
         className="absolute inset-0 w-full h-full object-cover z-0"
         style={{ objectPosition: 'center 50%' }}
       />
       {/* Gradient Overlay */}
       <div
         className="absolute inset-0 w-full h-full z-0"
-        style={{ background: 'linear-gradient(rgba(27, 54, 93, 0.7), rgba(27, 54, 93, 0.5))' }}
+        style={{ background: 'linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.6))' }}
       />
       <Container className="relative z-10 text-center text-white flex flex-col items-center justify-center w-full max-w-4xl px-4">
         <motion.div
@@ -107,31 +107,33 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => {
           <div className="text-center">
             <AnimatedHeading
               as="h1"
-              flowColor="#FBBF24"
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light leading-snug text-white drop-shadow-lg mb-8 break-words text-center max-w-full mx-auto px-4"
+              flowColor="#f97316"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white drop-shadow-lg mb-8 break-words text-center max-w-full mx-auto px-4"
             >
-              Transform Your Vision Into Extraordinary Reality
+              QUALITY CONSTRUCTION
+              <br />
+              <span className="text-orange-500">LASTING IMPRESSIONS</span>
             </AnimatedHeading>
           </div>
           {/* Subheadline */}
-          <p className="text-xl md:text-2xl mb-10 max-w-2xl mx-auto leading-relaxed font-light text-white/90">
-            Premium construction services with guaranteed results and on-time delivery
+          <p className="text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed font-normal text-white/90">
+            Professional construction services delivering exceptional quality, innovative design, and lasting value for your investment.
           </p>
           {/* Trust Badges */}
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             <div className="glass px-6 py-3 flex items-center gap-2 text-lg font-semibold shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/30 hover:scale-105 cursor-pointer">
-              <ShieldCheck className="w-5 h-5 text-success-green" /> 15+ Years Experience
+              <ShieldCheck className="w-5 h-5 text-orange-500" /> 25+ Years Experience
             </div>
             <div className="glass px-6 py-3 flex items-center gap-2 text-lg font-semibold shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/30 hover:scale-105 cursor-pointer">
-              <Users className="w-5 h-5 text-accent-emerald" /> 500+ Projects Completed
+              <Users className="w-5 h-5 text-orange-500" /> 500+ Projects Completed
             </div>
             <div className="glass px-6 py-3 flex items-center gap-2 text-lg font-semibold shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/30 hover:scale-105 cursor-pointer">
-              <Clock className="w-5 h-5 text-warning-amber" /> 98% Client Satisfaction
+              <Clock className="w-5 h-5 text-orange-500" /> 98% Client Satisfaction
             </div>
           </div>
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 w-full max-w-2xl mx-auto">
-            <Button size="lg" variant="primary" className="shadow-xl min-w-[220px]" onClick={() => {
+            <Button size="lg" variant="primary" className="bg-orange-500 hover:bg-orange-600 shadow-xl min-w-[220px]" onClick={() => {
               if (location.pathname === '/') {
                 const contactSection = document.getElementById('contact');
                 if (contactSection) {
@@ -141,9 +143,9 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => {
                 navigate('/contact', { state: { scrollTo: 'contact' } });
               }
             }}>
-              Get FREE Quote in 24 Hours <ArrowRight className="ml-2 w-5 h-5" />
+              Get FREE Quote <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
-            <Button size="lg" variant="glass" className="backdrop-blur-md text-white shadow-lg border border-white/30 hover:border-primary-gold hover:shadow-gold-500/40 hover:backdrop-blur-xl hover:bg-white/10 hover:text-primary-gold focus:text-primary-gold focus:border-primary-gold transition-all duration-300 min-w-[220px] text-shadow-lg" onClick={() => {
+            <Button size="lg" variant="glass" className="backdrop-blur-md text-white shadow-lg border border-white/30 hover:border-orange-500 hover:shadow-orange-500/40 hover:backdrop-blur-xl hover:bg-white/10 hover:text-orange-500 focus:text-orange-500 focus:border-orange-500 transition-all duration-300 min-w-[220px] text-shadow-lg" onClick={() => {
               if (location.pathname === '/') {
                 const portfolioSection = document.getElementById('portfolio');
                 if (portfolioSection) {
@@ -153,25 +155,25 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => {
                 navigate('/portfolio', { state: { scrollTo: 'portfolio' } });
               }
             }}>
-              View Our Premium Projects
+              View Our Work
             </Button>
           </div>
         </motion.div>
         {/* Floating Contact Info - sticky on mobile */}
         <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 sm:bottom-8 sm:right-8">
           <a
-            href="tel:+91-XXXXXXXXXX"
+            href="tel:+1-555-0123"
             className={`glass flex flex-row items-center shadow-lg border border-white/30 cursor-pointer transition-all duration-300 overflow-hidden h-14 ${isHovered ? 'px-6 w-[260px] rounded-full' : 'w-14 p-0 rounded-full justify-center'}`}
             aria-label="Call phone number"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            <Phone className="w-7 h-7 text-primary-gold transition-all duration-300" />
+            <Phone className="w-7 h-7 text-orange-500 transition-all duration-300" />
             <span
-              className={`ml-3 text-lg font-bold text-primary-gold transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0 w-0 overflow-hidden'}`}
+              className={`ml-3 text-lg font-bold text-orange-500 transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0 w-0 overflow-hidden'}`}
               style={{ transition: 'opacity 0.3s, width 0.3s' }}
             >
-              +91-XXXXXXXXXX
+              +1-555-0123
             </span>
           </a>
         </div>

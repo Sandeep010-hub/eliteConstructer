@@ -44,7 +44,7 @@ export const About: React.FC = () => {
                 viewport={{ once: true }}
                 className="flex items-center"
               >
-                <CheckCircleIcon className="w-6 h-6 text-gold-500 mr-3 flex-shrink-0" />
+                <CheckCircleIcon className="w-6 h-6 text-orange-500 mr-3 flex-shrink-0" />
                 <span className="text-gray-700">{value}</span>
               </motion.div>
             ))}
@@ -64,7 +64,7 @@ export const About: React.FC = () => {
             className="rounded-lg shadow-xl"
           />
           <div className="absolute -bottom-6 -left-6 bg-navy-900 text-white p-6 rounded-lg shadow-xl">
-            <div className="text-3xl font-bold text-gold-500">25+</div>
+            <div className="text-3xl font-bold text-orange-500">25+</div>
             <div className="text-sm">Years of Excellence</div>
           </div>
         </motion.div>
@@ -103,7 +103,7 @@ export const About: React.FC = () => {
                 className="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
               />
               <h4 className="text-lg font-bold text-navy-900 mb-2">{member.name}</h4>
-              <p className="text-gold-600 font-semibold mb-3">{member.position}</p>
+              <p className="text-orange-600 font-semibold mb-3">{member.position}</p>
               <p className="text-gray-600 text-sm mb-4 leading-relaxed">{member.bio}</p>
               
               <div className="space-y-1">
@@ -127,10 +127,10 @@ export const About: React.FC = () => {
         
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {[
-            { number: '500+', label: 'Projects Completed' },
-            { number: '25+', label: 'Years in Business' },
-            { number: '50+', label: 'Team Members' },
-            { number: '100%', label: 'Client Satisfaction' }
+            { number: '2k+', label: 'Projects Completed' },
+            { number: '3k+', label: 'Happy Clients' },
+            { number: '15k+', label: 'Hours of Work' },
+            { number: '1k+', label: 'Awards Won' }
           ].map((stat, index) => (
             <motion.div
               key={index}
@@ -140,7 +140,7 @@ export const About: React.FC = () => {
               viewport={{ once: true }}
               className="text-center"
             >
-              <div className="text-3xl md:text-4xl font-bold text-gold-500 mb-2">
+              <div className="text-3xl md:text-4xl font-bold text-orange-500 mb-2">
                 {stat.number}
               </div>
               <div className="text-sm md:text-base text-gray-300">

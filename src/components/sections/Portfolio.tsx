@@ -88,7 +88,7 @@ export const Portfolio: React.FC<PortfolioProps> = () => {
           viewport={{ once: true }}
         >
           <AnimatedHeading as="h2" className="text-4xl md:text-5xl mb-6 text-navy-900">
-            Our Portfolio
+            Building Your Dream Projects
           </AnimatedHeading>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Explore our collection of exceptional projects that showcase our commitment to quality, innovation, and craftsmanship.
@@ -106,8 +106,8 @@ export const Portfolio: React.FC<PortfolioProps> = () => {
             darkBg={false}
             className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
               activeCategory === category.id
-                ? 'bg-white border-primary-gold text-primary-gold shadow-lg'
-                : 'bg-white text-navy-900 border border-gray-200 hover:bg-navy-50 hover:border-primary-gold'
+                ? 'bg-white border-orange-500 text-orange-500 shadow-lg'
+                : 'bg-white text-navy-900 border border-gray-200 hover:bg-orange-50 hover:border-orange-500'
             }`}
             onClick={() => setActiveCategory(category.id)}
           >
