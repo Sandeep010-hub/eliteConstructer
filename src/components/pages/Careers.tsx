@@ -237,8 +237,29 @@ export const Careers: React.FC = () => {
                   </div>
                   
                   <div className="flex flex-col justify-center">
-                    <Button className="w-full mb-3">Apply Now</Button>
-                    <Button variant="ghost" className="w-full">Learn More</Button>
+                    <Button 
+                      className="w-full mb-3"
+                      onClick={() => {
+                        const contactSection = document.getElementById('contact');
+                        if (contactSection) {
+                          contactSection.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      }}
+                    >
+                      Apply Now
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      className="w-full"
+                      onClick={() => {
+                        const contactSection = document.getElementById('contact');
+                        if (contactSection) {
+                          contactSection.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      }}
+                    >
+                      Learn More
+                    </Button>
                   </div>
                 </div>
               </Card>

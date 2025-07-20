@@ -74,8 +74,29 @@ export const Commercial: React.FC = () => {
               Professional commercial construction services for offices, retail, restaurants, and industrial facilities. We deliver projects on time, within budget, and to the highest quality standards.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg">Request Project Consultation</Button>
-              <Button variant="secondary" size="lg">View Commercial Portfolio</Button>
+              <Button 
+                size="lg"
+                onClick={() => {
+                  const contactSection = document.getElementById('contact');
+                  if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
+                Request Project Consultation
+              </Button>
+              <Button 
+                variant="secondary" 
+                size="lg"
+                onClick={() => {
+                  if (setCurrentPage) {
+                    setCurrentPage('portfolio');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }
+                }}
+              >
+                View Commercial Portfolio
+              </Button>
             </div>
           </motion.div>
 

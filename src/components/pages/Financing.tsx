@@ -228,6 +228,12 @@ export const Financing: React.FC = () => {
                     <option value="poor">Below 650 (Poor)</option>
                   </select>
                 </div>
+                  onClick={() => {
+                    const contactSection = document.getElementById('contact');
+                    if (contactSection) {
+                      contactSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
                 <Button className="w-full bg-gold-500 hover:bg-gold-600 text-navy-900">
                   Calculate Pre-Qualification
                 </Button>

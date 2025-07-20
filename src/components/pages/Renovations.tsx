@@ -75,8 +75,29 @@ export const Renovations: React.FC = () => {
               Transform your existing space into the home of your dreams. From kitchen and bathroom remodels to whole home renovations, we bring new life to every space.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg">Get Free Renovation Quote</Button>
-              <Button variant="secondary" size="lg">View Before & After Gallery</Button>
+              <Button 
+                size="lg"
+                onClick={() => {
+                  const contactSection = document.getElementById('contact');
+                  if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
+                Get Free Renovation Quote
+              </Button>
+              <Button 
+                variant="secondary" 
+                size="lg"
+                onClick={() => {
+                  if (setCurrentPage) {
+                    setCurrentPage('portfolio');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }
+                }}
+              >
+                View Before & After Gallery
+              </Button>
             </div>
           </motion.div>
         </div>

@@ -183,7 +183,16 @@ export const Process: React.FC = () => {
             <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
               Let's discuss your vision and how our proven process can bring it to life. Schedule your free consultation today.
             </p>
-            <Button size="lg" className="bg-gold-500 hover:bg-gold-600 text-navy-900">
+            <Button 
+              size="lg" 
+              className="bg-gold-500 hover:bg-gold-600 text-navy-900"
+              onClick={() => {
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                  contactSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
               Schedule Free Consultation
             </Button>
           </Card>

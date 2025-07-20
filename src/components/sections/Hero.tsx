@@ -24,7 +24,7 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => {
   };
 
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <div 
@@ -72,7 +72,19 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => {
             <Button 
               size="lg" 
               className="bg-gold-500 hover:bg-gold-600 text-navy-900 font-bold px-8 py-4 text-lg"
-              onClick={() => scrollToSection('contact')}
+              onClick={() => {
+                if (setCurrentPage) {
+                  setCurrentPage('contact');
+                  setTimeout(() => {
+                    const element = document.getElementById('contact');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }, 100);
+                } else {
+                  scrollToSection('contact');
+                }
+              }}
             >
               Get Free Consultation
             </Button>
@@ -80,7 +92,19 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentPage }) => {
               variant="ghost" 
               size="lg" 
               className="text-white border-2 border-white hover:bg-white hover:text-navy-900 px-8 py-4 text-lg"
-              onClick={() => scrollToSection('portfolio')}
+              onClick={() => {
+                if (setCurrentPage) {
+                  setCurrentPage('portfolio');
+                  setTimeout(() => {
+                    const element = document.getElementById('portfolio');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }, 100);
+                } else {
+                  scrollToSection('portfolio');
+                }
+              }}
             >
               View Our Work
             </Button>

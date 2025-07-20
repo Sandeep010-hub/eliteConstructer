@@ -30,6 +30,76 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) =
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Determine if we're on homepage
+  const isHomePage = currentPage === 'home';
+  
+  // Navbar styling based on page and scroll state
+  const getNavbarStyles = () => {
+    if (isHomePage) {
+      return scrolled 
+        ? 'bg-white/95 backdrop-blur-md shadow-lg py-2' 
+        : 'bg-transparent py-4';
+    } else {
+      return 'bg-white shadow-lg py-2';
+    }
+  };
+  
+  const getTextColor = (isActive = false) => {
+    if (isHomePage) {
+      if (scrolled) {
+        return isActive ? 'text-navy-900' : 'text-gray-700 hover:text-navy-900';
+      } else {
+        return isActive ? 'text-gold-500' : 'text-white hover:text-gold-500';
+      }
+    } else {
+      return isActive ? 'text-navy-900' : 'text-gray-700 hover:text-navy-900';
+    }
+  };
+  
+  const getLogoStyles = () => {
+    if (isHomePage) {
+      return scrolled ? 'bg-navy-900' : 'bg-white/20 backdrop-blur-sm';
+    } else {
+      return 'bg-navy-900';
+    }
+  };
+  
+  const getLogoTextColor = () => {
+    if (isHomePage) {
+      return scrolled ? 'text-navy-900' : 'text-white';
+    } else {
+      return 'text-navy-900';
+    }
+  };
+  
+  const getPhoneColor = () => {
+    if (isHomePage) {
+      return scrolled 
+        ? 'text-navy-900 hover:text-gold-500' 
+        : 'text-white hover:text-gold-500';
+    } else {
+      return 'text-navy-900 hover:text-gold-500';
+    }
+  };
+  
+  const getButtonStyles = () => {
+    if (isHomePage) {
+      return scrolled 
+        ? 'bg-navy-900 hover:bg-navy-800 text-white' 
+        : 'bg-gold-500 hover:bg-gold-600 text-navy-900';
+    } else {
+      return 'bg-navy-900 hover:bg-navy-800 text-white';
+    }
+  };
+  
+  const getMobileButtonColor = () => {
+    if (isHomePage) {
+      return scrolled ? 'text-gray-700' : 'text-white';
+    } else {
+      return 'text-gray-700';
+    }
+  };
+
   const handleNavigation = (page: string) => {
     setCurrentPage(page);
     setMobileMenuOpen(false);
@@ -55,9 +125,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) =
   };
 
   return (
-    <header className={`fixed w-full z-50 transition-all duration-500 ${
-      scrolled ? 'bg-white/95 backdrop-blur-md shadow-lg py-2' : 'bg-transparent py-4'
-    }`}>
+    <header className={`fixed w-full z-50 transition-all duration-500 ${getNavbarStyles()}`}>
       <Container>
         <nav className="flex items-center justify-between">
           {/* Logo */}
@@ -67,18 +135,20 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) =
           >
             <div className="flex items-center space-x-3">
               <div className={`w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-105 ${
-                scrolled ? 'bg-navy-900' : 'bg-white/20 backdrop-blur-sm'
+                getLogoStyles()
               }`}>
                 <span className={`font-bold text-xl transition-colors duration-300 ${
-                  scrolled ? 'text-white' : 'text-white'
+                  'text-white'
                 }`}>E</span>
               </div>
               <div>
                 <div className={`font-bold text-lg transition-colors duration-300 ${
-                  scrolled ? 'text-navy-900' : 'text-white'
+                  getLogoTextColor()
                 }`}>Elite Construction</div>
                 <div className={`text-xs transition-colors duration-300 ${
-                  scrolled ? 'text-gray-600' : 'text-white/80'
+                  isHomePage 
+                    ? (scrolled ? 'text-gray-600' : 'text-white/80')
+                    : 'text-gray-600'
                 }`}>& Design</div>
               </div>
             </div>
@@ -97,8 +167,8 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) =
                   }
                 }}
                 className={`font-medium transition-all duration-300 relative group px-2 py-1 ${
-                  scrolled ? 'text-gray-700 hover:text-navy-900' : 'text-white hover:text-gold-500'
-                } ${currentPage === item.href ? (scrolled ? 'text-navy-900' : 'text-gold-500') : ''}`}
+                  getTextColor(currentPage === item.href)
+                }`}
               >
                 {item.name}
                 <span className={`absolute -bottom-1 left-0 h-0.5 transition-all duration-300 ${
@@ -114,20 +184,14 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) =
           <div className="hidden lg:flex items-center space-x-4">
             <a 
               href="tel:+1-555-0123" 
-              className={`flex items-center transition-colors duration-300 hover:scale-105 ${
-                scrolled ? 'text-navy-900 hover:text-gold-500' : 'text-white hover:text-gold-500'
-              }`}
+              className={`flex items-center transition-colors duration-300 hover:scale-105 ${getPhoneColor()}`}
             >
               <PhoneIcon className="w-5 h-5 mr-2" />
               <span className="font-semibold">(555) 123-4567</span>
             </a>
             <Button 
               onClick={() => scrollToSection('contact')}
-              className={`transition-all duration-300 hover:scale-105 ${
-                scrolled 
-                  ? 'bg-navy-900 hover:bg-navy-800 text-white' 
-                  : 'bg-gold-500 hover:bg-gold-600 text-navy-900'
-              }`}
+              className={`transition-all duration-300 hover:scale-105 ${getButtonStyles()}`}
             >
               Get Free Quote
             </Button>
@@ -137,9 +201,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) =
           <div className="lg:hidden">
             <button
               type="button"
-              className={`transition-colors duration-300 p-2 rounded-lg hover:bg-white/10 ${
-                scrolled ? 'text-gray-700' : 'text-white'
-              }`}
+              className={`transition-colors duration-300 p-2 rounded-lg hover:bg-white/10 ${getMobileButtonColor()}`}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? (

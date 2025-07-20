@@ -80,8 +80,29 @@ export const CustomHomes: React.FC = () => {
               Build the home of your dreams with our expert team. From initial design to final walkthrough, we'll guide you through every step of creating your perfect custom home.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg">Schedule Design Consultation</Button>
-              <Button variant="secondary" size="lg">View Custom Home Gallery</Button>
+              <Button 
+                size="lg"
+                onClick={() => {
+                  const contactSection = document.getElementById('contact');
+                  if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
+                Schedule Design Consultation
+              </Button>
+              <Button 
+                variant="secondary" 
+                size="lg"
+                onClick={() => {
+                  if (setCurrentPage) {
+                    setCurrentPage('portfolio');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }
+                }}
+              >
+                View Custom Home Gallery
+              </Button>
             </div>
           </motion.div>
 
