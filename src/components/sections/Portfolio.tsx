@@ -87,11 +87,11 @@ export const Portfolio: React.FC<PortfolioProps> = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <AnimatedHeading as="h2" className="text-4xl md:text-5xl mb-6 text-navy-900">
-            Our Portfolio
+          <AnimatedHeading as="h2" className="text-4xl md:text-5xl mb-6 text-black-900">
+            Our Project Portfolio
           </AnimatedHeading>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Explore our collection of exceptional projects that showcase our commitment to quality, innovation, and craftsmanship.
+            Explore our collection of exceptional projects that showcase our commitment to <span className="text-primary-orange font-bold">quality</span>, <span className="text-secondary-orange font-bold">innovation</span>, and craftsmanship.
           </p>
         </motion.div>
       </div>
@@ -104,10 +104,10 @@ export const Portfolio: React.FC<PortfolioProps> = () => {
             variant="secondary"
             size="sm"
             darkBg={false}
-            className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
+            className={`px-8 py-4 rounded-full font-bold transition-all duration-300 transform hover:scale-105 ${
               activeCategory === category.id
-                ? 'bg-white border-primary-gold text-primary-gold shadow-lg'
-                : 'bg-white text-navy-900 border border-gray-200 hover:bg-navy-50 hover:border-primary-gold'
+                ? 'orange-gradient-bg text-white shadow-lg hover:shadow-orange-glow border-2 border-transparent'
+                : 'bg-white text-gray-700 border-2 border-gray-200 hover:bg-orange-50 hover:border-primary-orange hover:text-primary-orange'
             }`}
             onClick={() => setActiveCategory(category.id)}
           >
@@ -130,17 +130,17 @@ export const Portfolio: React.FC<PortfolioProps> = () => {
               className="group cursor-pointer"
               onClick={() => openModal(project)}
             >
-              <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-500">
+              <div className="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-orange-glow transition-all duration-500 border border-gray-100 hover:border-primary-orange/30">
                 <img
                   src={project.image}
                   alt={project.title}
                   className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                     <h3 className="text-xl font-bold mb-2">{project.title}</h3>
                     <p className="text-sm opacity-90">{project.location} • {project.year}</p>
-                    <div className="mt-2 text-xs bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 inline-block">
+                    <div className="mt-3 text-xs orange-gradient-bg rounded-full px-4 py-2 inline-block font-bold">
                       Click to view details
                     </div>
                   </div>
@@ -157,6 +157,7 @@ export const Portfolio: React.FC<PortfolioProps> = () => {
           variant="primary" 
           size="lg"
           onClick={() => navigate('/contact')}
+          className="transform hover:scale-105"
         >
           Start Your Project Today
         </Button>
@@ -169,22 +170,22 @@ export const Portfolio: React.FC<PortfolioProps> = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
             onClick={closeModal}
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+              className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-gray-200"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Modal Header */}
-              <div className="flex justify-between items-center p-6 border-b">
-                <h3 className="text-2xl font-bold text-navy-900">{selectedProject.title}</h3>
+              <div className="flex justify-between items-center p-6 border-b border-gray-200 bg-light-gray rounded-t-2xl">
+                <h3 className="text-2xl font-bold text-black-900">{selectedProject.title}</h3>
                 <button
                   onClick={closeModal}
-                  className="text-gray-500 hover:text-gray-700 p-2 hover:bg-gray-100 rounded-full transition-colors"
+                  className="text-gray-500 hover:text-primary-orange p-2 hover:bg-orange-50 rounded-full transition-colors"
                 >
                   <XMarkIcon className="w-6 h-6" />
                 </button>
@@ -204,21 +205,21 @@ export const Portfolio: React.FC<PortfolioProps> = () => {
                         <img
                           src={images[currentImageIndex]}
                           alt={selectedProject.title}
-                          className="w-full h-96 object-cover rounded-lg"
+                          className="w-full h-96 object-cover rounded-xl"
                         />
                         {images.length > 1 && (
                           <>
                             <button
                               onClick={prevImage}
-                              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all hover:scale-110"
+                              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg transition-all hover:scale-110 border border-gray-200"
                             >
-                              <ChevronLeftIcon className="w-6 h-6" />
+                              <ChevronLeftIcon className="w-6 h-6 text-primary-orange" />
                             </button>
                             <button
                               onClick={nextImage}
-                              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all hover:scale-110"
+                              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg transition-all hover:scale-110 border border-gray-200"
                             >
-                              <ChevronRightIcon className="w-6 h-6" />
+                              <ChevronRightIcon className="w-6 h-6 text-primary-orange" />
                             </button>
                             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
                               {images.map((_, index) => (
@@ -226,7 +227,7 @@ export const Portfolio: React.FC<PortfolioProps> = () => {
                                   key={index}
                                   onClick={() => setCurrentImageIndex(index)}
                                   className={`w-3 h-3 rounded-full transition-all ${
-                                    index === currentImageIndex ? 'bg-white scale-125' : 'bg-white/50 hover:bg-white/75'
+                                    index === currentImageIndex ? 'bg-primary-orange scale-125' : 'bg-white/50 hover:bg-white/75'
                                   }`}
                                 />
                               ))}
@@ -241,32 +242,32 @@ export const Portfolio: React.FC<PortfolioProps> = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                   {/* Project Details */}
                   <div>
-                    <h4 className="text-lg font-bold text-navy-900 mb-4">Project Details</h4>
-                    <div className="space-y-3">
+                    <h4 className="text-lg font-bold text-black-900 mb-4">Project Details</h4>
+                    <div className="space-y-3 bg-light-gray rounded-lg p-4">
                       <div className="flex justify-between">
                         <span className="text-gray-600">Location:</span>
-                        <span className="font-semibold">{selectedProject.location}</span>
+                        <span className="font-bold text-primary-orange">{selectedProject.location}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Year:</span>
-                        <span className="font-semibold">{selectedProject.year}</span>
+                        <span className="font-bold text-secondary-orange">{selectedProject.year}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Size:</span>
-                        <span className="font-semibold">{selectedProject.specs.size}</span>
+                        <span className="font-bold text-black-900">{selectedProject.specs.size}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Timeline:</span>
-                        <span className="font-semibold">{selectedProject.specs.timeline}</span>
+                        <span className="font-bold text-black-900">{selectedProject.specs.timeline}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Budget:</span>
-                        <span className="font-semibold">{selectedProject.specs.budget}</span>
+                        <span className="font-bold text-black-900">{selectedProject.specs.budget}</span>
                       </div>
                     </div>
                     
                     <div className="mt-6">
-                      <h5 className="font-semibold text-navy-900 mb-2">Description</h5>
+                      <h5 className="font-bold text-black-900 mb-2">Description</h5>
                       <p className="text-gray-600 text-sm leading-relaxed">
                         {selectedProject.description}
                       </p>
@@ -285,17 +286,17 @@ export const Portfolio: React.FC<PortfolioProps> = () => {
                   {/* Testimonial */}
                   {selectedProject.testimonial && (
                     <div>
-                      <h4 className="text-lg font-bold text-navy-900 mb-4">Client Testimonial</h4>
-                      <div className="bg-gray-50 p-6 rounded-lg">
+                      <h4 className="text-lg font-bold text-black-900 mb-4">Client Testimonial</h4>
+                      <div className="bg-light-gray p-6 rounded-xl border border-gray-200">
                         <div className="flex mb-3">
                           {[...Array(selectedProject.testimonial.rating)].map((_, i) => (
-                            <StarIcon key={i} className="w-5 h-5 text-gold-500" />
+                            <StarIcon key={i} className="w-5 h-5 text-secondary-orange" />
                           ))}
                         </div>
                         <p className="text-gray-700 mb-4 italic">
                           "{selectedProject.testimonial.text}"
                         </p>
-                        <p className="font-semibold text-navy-900">
+                        <p className="font-bold text-primary-orange">
                           — {selectedProject.testimonial.client}
                         </p>
                       </div>
