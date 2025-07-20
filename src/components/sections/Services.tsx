@@ -1,240 +1,270 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  HomeIcon, 
-  WrenchScrewdriverIcon, 
-  BuildingOfficeIcon,
-  SparklesIcon,
-  PlusIcon,
-} from '@heroicons/react/24/outline';
 import { Button } from '../ui/Button';
-import { Card } from '../ui/Card';
+import { Container } from '../ui/Container';
 import { Section } from '../ui/Section';
-import { services } from '../../data/services';
-import { useNavigate } from 'react-router-dom';
-import { AnimatedHeading } from '../ui/AnimatedHeading';
+import { Card } from '../ui/Card';
+import { Home, Wrench, Building2, Palette, ShieldCheck, ArrowRight, CheckCircle, Clock, Users } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
-const iconMap = {
-  home: HomeIcon,
-  wrench: WrenchScrewdriverIcon,
-  building: BuildingOfficeIcon,
-  utensils: SparklesIcon,
-  bath: SparklesIcon,
-  plus: PlusIcon,
-  tree: SparklesIcon,
-  leaf: SparklesIcon
-};
-
-const categories = [
-  { id: 'all', name: 'All Services' },
-  { id: 'residential', name: 'Residential' },
-  { id: 'commercial', name: 'Commercial' },
-  { id: 'specialty', name: 'Specialty' }
-];
-
-interface ServicesProps {
-  setCurrentPage?: (page: string) => void;
-}
-
-export const Services: React.FC<ServicesProps> = ({ setCurrentPage }) => {
-  const [activeCategory, setActiveCategory] = useState('all');
+export const Services: React.FC = () => {
+  const [hoveredService, setHoveredService] = useState<number | null>(null);
+  const location = useLocation();
   const navigate = useNavigate();
 
-  const filteredServices = activeCategory === 'all' 
-    ? services 
-    : services.filter(service => service.category === activeCategory);
-
-  const handleServiceClick = (serviceTitle: string) => {
-    if (setCurrentPage) {
-      if (serviceTitle.includes('Custom Home')) {
-        setCurrentPage('custom-homes');
-      } else if (serviceTitle.includes('Renovation') || serviceTitle.includes('Kitchen') || serviceTitle.includes('Bathroom')) {
-        setCurrentPage('renovations');
-      } else if (service.title.toLowerCase().includes('commercial')) {
-        setCurrentPage('commercial');
-      } else {
-        // Scroll to contact for other services
-        const contactSection = document.getElementById('contact');
-        if (contactSection) {
-          contactSection.scrollIntoView({ behavior: 'smooth' });
-        }
-      }
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+  const services = [
+    {
+      icon: Home,
+      title: 'Custom Home Construction',
+      description: 'Design and build your dream home from the ground up with our comprehensive custom home construction services.',
+      features: ['Architectural Design', 'Permit Handling', 'Quality Materials', '5-Year Warranty'],
+      image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80',
+      route: '/custom-homes'
+    },
+    {
+      icon: Wrench,
+      title: 'Home Renovations',
+      description: 'Transform your existing space with our comprehensive renovation services tailored to your lifestyle and budget.',
+      features: ['Kitchen Remodeling', 'Bathroom Updates', 'Room Additions', 'Full Home Makeovers'],
+      image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80',
+      route: '/renovations'
+    },
+    {
+      icon: Building2,
+      title: 'Commercial Construction',
+      description: 'Professional commercial construction services for businesses, offices, and retail spaces.',
+      features: ['Office Buildings', 'Retail Spaces', 'Restaurants', 'Warehouses'],
+      image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80',
+      route: '/commercial'
+    },
+    {
+      icon: Palette,
+      title: 'Design Consultation',
+      description: 'Expert design consultation to help you plan and visualize your construction or renovation project.',
+      features: ['3D Visualization', 'Material Selection', 'Space Planning', 'Budget Planning'],
+      image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80',
+      route: '/process'
     }
-  };
+  ];
 
-  const scrollToContact = () => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handleServiceClick = (route: string) => {
+    navigate(route);
   };
 
   return (
-    <Section id="services" background="gray" padding="xl">
-      <div className="text-center mb-16">
+    <Section id="services" className="bg-gradient-to-br from-slate-50 to-slate-100">
+      <Helmet>
+        <title>Construction Services | Elite Construction & Design</title>
+        <meta name="description" content="Comprehensive construction services including custom homes, renovations, commercial projects, and design consultation in Southern California." />
+      </Helmet>
+      
+      <Container>
+        {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
+          className="text-center mb-16"
         >
-          <AnimatedHeading as="h2" className="text-4xl md:text-5xl mb-6 text-black-900">
-            Our Construction Services
-          </AnimatedHeading>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            From concept to completion, we deliver excellence in every project with <span className="text-primary-orange font-bold">uncompromising quality</span> and attention to detail.
+          <div className="inline-flex items-center gap-2 bg-orange-100 text-orange-600 px-4 py-2 rounded-full font-medium mb-6">
+            <ShieldCheck className="w-4 h-4" />
+            <span>Our Services</span>
+          </div>
+          <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
+            Comprehensive Construction Solutions
+          </h2>
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+            From custom homes to commercial projects, we deliver exceptional construction services 
+            with unmatched quality and attention to detail.
           </p>
         </motion.div>
-      </div>
 
-      {/* Category Filter */}
-      <div className="flex flex-wrap justify-center gap-4 mb-12">
-        {categories.map((category) => (
-          <button
-            key={category.id}
-            onClick={() => setActiveCategory(category.id)}
-            className={`px-8 py-4 rounded-full font-bold transition-all duration-300 hover:scale-105 transform ${
-              activeCategory === category.id
-                ? 'orange-gradient-bg text-white shadow-lg hover:shadow-orange-glow'
-                : 'bg-white text-gray-700 hover:bg-orange-50 border-2 border-gray-200 hover:border-primary-orange hover:text-primary-orange'
-            }`}
-          >
-            {category.name}
-          </button>
-        ))}
-      </div>
-
-      {/* Services Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-        {filteredServices.map((service, index) => {
-          const IconComponent = iconMap[service.icon as keyof typeof iconMap] || HomeIcon;
-          let detailPath = '/services';
-          if (service.title.toLowerCase().includes('custom')) detailPath = '/custom-homes';
-          else if (service.title.toLowerCase().includes('renovation') || service.title.toLowerCase().includes('remodel')) detailPath = '/renovations';
-          else if (service.title.toLowerCase().includes('commercial')) detailPath = '/commercial';
-          else if (service.title.toLowerCase().includes('outdoor')) detailPath = '/outdoor-living';
-          else if (service.title.toLowerCase().includes('green')) detailPath = '/green-building';
-          else detailPath = '/contact';
-          return (
-            <motion.div
-              key={service.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <Card hover className="h-full flex flex-col items-center text-center bg-white rounded-2xl shadow-xl hover:shadow-orange-glow p-8 border border-gray-100 hover:border-primary-orange/30 transition-all duration-300">
-                <div className="w-20 h-20 orange-gradient-bg rounded-2xl flex items-center justify-center mb-6 shadow-lg">
-                  <IconComponent className="w-10 h-10 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-black-900 mb-3">
-                  {service.title}
-                </h3>
-                <p className="text-gray-600 mb-6 text-base leading-relaxed line-clamp-3">
-                  {service.description}
-                </p>
-                <div className="w-full flex flex-col gap-3 mb-6 bg-light-gray rounded-lg p-4">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-500 font-medium">Starting from:</span>
-                    <span className="font-bold text-primary-orange">{service.startingPrice}</span>
+        {/* Services Grid */}
+        <div className="grid lg:grid-cols-2 gap-8 mb-16">
+          {services.map((service, index) => {
+            const IconComponent = service.icon;
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="group"
+                onMouseEnter={() => setHoveredService(index)}
+                onMouseLeave={() => setHoveredService(null)}
+              >
+                <Card className="h-full bg-white shadow-lg hover:shadow-2xl transition-all duration-300 border-0 overflow-hidden">
+                  <div className="relative h-64 overflow-hidden">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div className="absolute top-6 left-6">
+                      <div className="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center">
+                        <IconComponent className="w-6 h-6 text-white" />
+                      </div>
+                    </div>
+                    <div className="absolute bottom-6 left-6 right-6">
+                      <h3 className="text-2xl font-bold text-white mb-2">{service.title}</h3>
+                    </div>
                   </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-500 font-medium">Timeline:</span>
-                    <span className="font-bold text-secondary-orange">{service.timeline}</span>
+                  
+                  <div className="p-8">
+                    <p className="text-slate-600 mb-6 leading-relaxed">
+                      {service.description}
+                    </p>
+                    
+                    {/* Features List */}
+                    <div className="space-y-3 mb-8">
+                      {service.features.map((feature, featureIndex) => (
+                        <div key={featureIndex} className="flex items-center gap-3">
+                          <CheckCircle className="w-5 h-5 text-orange-500" />
+                          <span className="text-slate-700 font-medium">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    <Button
+                      variant="primary"
+                      className="w-full bg-orange-500 hover:bg-orange-600 text-white group"
+                      onClick={() => handleServiceClick(service.route)}
+                    >
+                      Learn More
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </div>
+                </Card>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Why Choose Us Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="bg-gradient-to-r from-slate-900 to-slate-800 rounded-3xl p-12 text-white"
+        >
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h3 className="text-3xl lg:text-4xl font-bold mb-6">
+                Why Choose Elite Construction?
+              </h3>
+              <p className="text-slate-300 text-lg leading-relaxed mb-8">
+                With over 25 years of experience, we've built our reputation on quality craftsmanship, 
+                transparent communication, and exceeding client expectations.
+              </p>
+              
+              <div className="grid gap-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <ShieldCheck className="w-6 h-6 text-orange-400" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-semibold mb-2">Licensed & Insured</h4>
+                    <p className="text-slate-400">Fully licensed contractors with comprehensive insurance coverage for your peace of mind.</p>
                   </div>
                 </div>
-                <div className="mt-auto w-full">
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    className="w-full"
-                    darkBg={false}
-                    onClick={() => navigate(detailPath)}
-                  >
-                    Learn More
-                  </Button>
+                
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-6 h-6 text-orange-400" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-semibold mb-2">On-Time Delivery</h4>
+                    <p className="text-slate-400">We respect your time and consistently deliver projects on schedule and within budget.</p>
+                  </div>
                 </div>
-              </Card>
-            </motion.div>
-          );
-        })}
-      </div>
+                
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <Users className="w-6 h-6 text-orange-400" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-semibold mb-2">Expert Team</h4>
+                    <p className="text-slate-400">Skilled craftsmen and project managers dedicated to bringing your vision to life.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="relative">
+              <img
+                src="https://images.unsplash.com/photo-1581244277943-fe4a9c777189?auto=format&fit=crop&w=800&q=80"
+                alt="Construction team at work"
+                className="rounded-2xl shadow-2xl"
+              />
+              <div className="absolute -bottom-6 -right-6 bg-orange-500 text-white p-6 rounded-2xl shadow-xl">
+                <div className="text-3xl font-bold">500+</div>
+                <div className="text-sm opacity-90">Projects Completed</div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
 
-      {/* Why Choose Us */}
-      <div className="mt-20">
-        <div className="text-center mb-12">
-          <h3 className="text-3xl font-bold text-black-900 mb-4">Why Choose <span className="text-primary-orange">Elite Construction</span>?</h3>
-          <p className="text-lg text-gray-600">The difference is in the <span className="text-secondary-orange font-bold">details</span></p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[
-            {
-              title: 'Licensed & Insured',
-              description: 'Fully licensed general contractor with comprehensive insurance coverage for your peace of mind.',
-              icon: '🛡️'
-            },
-            {
-              title: '25+ Years Experience',
-              description: 'Quarter-century of expertise delivering exceptional construction and renovation projects.',
-              icon: '⭐'
-            },
-            {
-              title: 'Premium Materials',
-              description: 'We source only the finest materials from trusted suppliers to ensure lasting quality.',
-              icon: '💎'
-            },
-            {
-              title: 'In-House Design Team',
-              description: 'Our talented designers work closely with you to bring your vision to life.',
-              icon: '🎨'
-            },
-            {
-              title: 'Project Warranty',
-              description: 'Comprehensive warranty coverage on all workmanship and materials for your protection.',
-              icon: '✅'
-            },
-            {
-              title: 'On-Time Delivery',
-              description: 'Proven track record of completing projects on schedule and within budget.',
-              icon: '⏰'
-            }
-          ].map((benefit, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <Card className="text-center h-full hover:shadow-orange-glow transition-shadow group border border-gray-100 hover:border-primary-orange/30">
-                <div className="text-5xl mb-6 group-hover:scale-110 transition-transform">{benefit.icon}</div>
-                <h4 className="text-lg font-bold text-black-900 mb-3">{benefit.title}</h4>
-                <p className="text-gray-600 text-sm">{benefit.description}</p>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-      {/* CTA Section */}
-      <div className="mt-16 text-center">
-        <Card className="black-gradient-bg text-white border border-primary-orange/20">
-          <h3 className="text-2xl font-bold mb-4">Ready to Start Your <span className="text-primary-orange">Dream Project</span>?</h3>
-          <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-            Get a <span className="text-secondary-orange font-bold">free consultation</span> and detailed quote for your construction or renovation project.
-          </p>
-          <Button 
-            size="lg" 
-            variant="primary"
-            onClick={() => navigate('/contact')}
-            className="transform hover:scale-105"
-          >
-            Get Free Quote Today
-          </Button>
-        </Card>
-      </div>
+        {/* CTA Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mt-16"
+        >
+          <div className="bg-orange-50 rounded-2xl p-12">
+            <h3 className="text-3xl font-bold text-slate-900 mb-4">
+              Ready to Start Your Project?
+            </h3>
+            <p className="text-slate-600 text-lg mb-8 max-w-2xl mx-auto">
+              Get a free consultation and detailed quote for your construction project. 
+              We'll discuss your vision and provide expert guidance.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                size="lg"
+                variant="primary"
+                className="bg-orange-500 hover:bg-orange-600 text-white group"
+                onClick={() => {
+                  if (location.pathname === '/') {
+                    const contactSection = document.getElementById('contact');
+                    if (contactSection) {
+                      contactSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  } else {
+                    navigate('/contact');
+                  }
+                }}
+              >
+                Get Free Consultation
+                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+              <Button
+                size="lg"
+                variant="ghost"
+                className="border-2 border-orange-500 text-orange-600 hover:bg-orange-500 hover:text-white"
+                onClick={() => {
+                  if (location.pathname === '/') {
+                    const portfolioSection = document.getElementById('portfolio');
+                    if (portfolioSection) {
+                      portfolioSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  } else {
+                    navigate('/portfolio');
+                  }
+                }}
+              >
+                View Portfolio
+              </Button>
+            </div>
+          </div>
+        </motion.div>
+      </Container>
     </Section>
   );
 };

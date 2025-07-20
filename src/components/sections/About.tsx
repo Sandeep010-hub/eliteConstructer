@@ -1,155 +1,326 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircleIcon } from '@heroicons/react/24/solid';
+import { Container } from '../ui/Container';
 import { Section } from '../ui/Section';
-import { Card } from '../ui/Card';
-import { team } from '../../data/team';
-import { AnimatedHeading } from '../ui/AnimatedHeading';
+import { Button } from '../ui/Button';
+import { CheckCircle, Users, Trophy, Clock, Star, ArrowRight, Award, Target, Heart } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 export const About: React.FC = () => {
+  const navigate = useNavigate();
+
+  const stats = [
+    { number: '25+', label: 'Years Experience', icon: Clock },
+    { number: '500+', label: 'Projects Completed', icon: Trophy },
+    { number: '98%', label: 'Client Satisfaction', icon: Star },
+    { number: '50+', label: 'Expert Team', icon: Users }
+  ];
+
+  const values = [
+    {
+      icon: Award,
+      title: 'Excellence',
+      description: 'We pursue perfection in every detail, using premium materials and superior craftsmanship.'
+    },
+    {
+      icon: Target,
+      title: 'Reliability',
+      description: 'On-time delivery and within budget completion are our standard commitments to every client.'
+    },
+    {
+      icon: Heart,
+      title: 'Integrity',
+      description: 'Transparent communication and honest business practices build lasting relationships with our clients.'
+    }
+  ];
+
+  const teamMembers = [
+    {
+      name: 'Michael Rodriguez',
+      role: 'Founder & CEO',
+      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
+      experience: '25+ years'
+    },
+    {
+      name: 'Sarah Chen',
+      role: 'Lead Architect',
+      image: 'https://images.unsplash.com/photo-1494790108755-2616b612e2c1?auto=format&fit=crop&w=400&q=80',
+      experience: '15+ years'
+    },
+    {
+      name: 'David Thompson',
+      role: 'Project Manager',
+      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80',
+      experience: '12+ years'
+    }
+  ];
+
   return (
-    <Section id="about" background="gray" padding="xl">
-      {/* Company Story */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
+    <Section id="about" className="bg-gradient-to-br from-slate-50 to-white">
+      <Helmet>
+        <title>About Us | Elite Construction & Design</title>
+        <meta name="description" content="Learn about Elite Construction & Design's 25+ years of experience in custom homes, renovations, and commercial construction in Southern California." />
+      </Helmet>
+      
+      <Container>
+        {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
+          className="text-center mb-16"
         >
-          <AnimatedHeading as="h2" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-black-900 mb-6 break-keep text-center max-w-6xl mx-auto px-4 lg:whitespace-nowrap">
-            Building <span className="text-primary-orange">Excellence</span> Since 1995
-          </AnimatedHeading>
-          <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-            Founded with a vision to deliver <span className="text-primary-orange font-bold">uncompromising quality</span> and craftsmanship, Elite Construction & Design has grown to become one of Southern California's most respected construction companies. Our journey began with a simple belief: every project deserves <span className="text-secondary-orange font-bold">exceptional attention to detail</span> and personalized service.
+          <div className="inline-flex items-center gap-2 bg-orange-100 text-orange-600 px-4 py-2 rounded-full font-medium mb-6">
+            <Users className="w-4 h-4" />
+            <span>About Us</span>
+          </div>
+          <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
+            Building Dreams for Over 25 Years
+          </h2>
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+            Elite Construction & Design has been Southern California's premier construction 
+            partner, transforming visions into extraordinary realities with unmatched expertise.
           </p>
-          <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-            Over the past <span className="text-primary-orange font-bold">25 years</span>, we've had the privilege of bringing hundreds of dreams to life, from luxury custom homes to complex commercial projects. Our commitment to excellence, innovation, and client satisfaction has earned us a reputation for delivering projects that exceed expectations.
-          </p>
-          
-          {/* Values */}
-          <div className="space-y-4">
-            {[
-              'Uncompromising Quality in Every Detail',
-              'Transparent Communication Throughout',
-              'On-Time, On-Budget Project Delivery',
-              'Sustainable Building Practices',
-              'Long-Term Client Relationships'
-            ].map((value, index) => (
+        </motion.div>
+
+        {/* Stats Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-20"
+        >
+          {stats.map((stat, index) => {
+            const IconComponent = stat.icon;
+            return (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="flex items-center"
+                className="text-center bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100"
               >
-                <CheckCircleIcon className="w-6 h-6 text-primary-orange mr-3 flex-shrink-0" />
-                <span className="text-gray-700 font-medium">{value}</span>
+                <div className="w-16 h-16 bg-orange-100 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                  <IconComponent className="w-8 h-8 text-orange-500" />
+                </div>
+                <div className="text-3xl lg:text-4xl font-bold text-slate-900 mb-2">{stat.number}</div>
+                <div className="text-slate-600 font-medium">{stat.label}</div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+
+        {/* Main Content - Split Layout */}
+        <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
+          {/* Story Side */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="space-y-6"
+          >
+            <h3 className="text-3xl lg:text-4xl font-bold text-slate-900">
+              Our Story of Excellence
+            </h3>
+            
+            <p className="text-lg text-slate-600 leading-relaxed">
+              Founded in 1999, Elite Construction & Design began with a simple mission: 
+              to build exceptional homes and commercial spaces that exceed expectations. 
+              What started as a small family business has grown into Southern California's 
+              most trusted construction partner.
+            </p>
+            
+            <p className="text-lg text-slate-600 leading-relaxed">
+              Our success stems from our unwavering commitment to quality, innovation, 
+              and client satisfaction. Every project we undertake reflects our dedication 
+              to superior craftsmanship and attention to detail.
+            </p>
+
+            {/* Key Points */}
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <CheckCircle className="w-6 h-6 text-orange-500 mt-1 flex-shrink-0" />
+                <div>
+                  <h4 className="font-semibold text-slate-900 mb-1">Licensed & Insured</h4>
+                  <p className="text-slate-600">Fully licensed general contractor with comprehensive insurance coverage.</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-3">
+                <CheckCircle className="w-6 h-6 text-orange-500 mt-1 flex-shrink-0" />
+                <div>
+                  <h4 className="font-semibold text-slate-900 mb-1">Award-Winning Team</h4>
+                  <p className="text-slate-600">Recognized by industry leaders for exceptional quality and innovation.</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-3">
+                <CheckCircle className="w-6 h-6 text-orange-500 mt-1 flex-shrink-0" />
+                <div>
+                  <h4 className="font-semibold text-slate-900 mb-1">Sustainable Practices</h4>
+                  <p className="text-slate-600">Committed to eco-friendly construction methods and materials.</p>
+                </div>
+              </div>
+            </div>
+
+            <Button
+              size="lg"
+              variant="primary"
+              className="bg-orange-500 hover:bg-orange-600 text-white group"
+              onClick={() => navigate('/process')}
+            >
+              Learn About Our Process
+              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </motion.div>
+
+          {/* Image Side */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="relative"
+          >
+            <div className="relative">
+              <img
+                src="https://images.unsplash.com/photo-1581244277943-fe4a9c777189?auto=format&fit=crop&w=800&q=80"
+                alt="Elite Construction team at work"
+                className="rounded-2xl shadow-2xl"
+              />
+              <div className="absolute -bottom-6 -left-6 bg-orange-500 text-white p-6 rounded-2xl shadow-xl">
+                <div className="text-2xl font-bold">Since 1999</div>
+                <div className="text-sm opacity-90">Building Excellence</div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Our Values */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="mb-20"
+        >
+          <div className="text-center mb-12">
+            <h3 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">
+              Our Core Values
+            </h3>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              These principles guide every decision we make and every project we complete.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {values.map((value, index) => {
+              const IconComponent = value.icon;
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="text-center bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100"
+                >
+                  <div className="w-16 h-16 bg-orange-100 rounded-xl mx-auto mb-6 flex items-center justify-center">
+                    <IconComponent className="w-8 h-8 text-orange-500" />
+                  </div>
+                  <h4 className="text-xl font-bold text-slate-900 mb-4">{value.title}</h4>
+                  <p className="text-slate-600 leading-relaxed">{value.description}</p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </motion.div>
+
+        {/* Meet Our Team */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="mb-16"
+        >
+          <div className="text-center mb-12">
+            <h3 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">
+              Meet Our Expert Team
+            </h3>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              Our experienced professionals bring decades of expertise to every project.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {teamMembers.map((member, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="text-center bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100"
+              >
+                <div className="aspect-square overflow-hidden">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-6">
+                  <h4 className="text-xl font-bold text-slate-900 mb-2">{member.name}</h4>
+                  <p className="text-orange-600 font-medium mb-2">{member.role}</p>
+                  <p className="text-slate-600 text-sm">{member.experience} of expertise</p>
+                </div>
               </motion.div>
             ))}
           </div>
         </motion.div>
 
+        {/* CTA Section */}
         <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="relative"
+          className="text-center bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-12 text-white"
         >
-          <img
-            src="https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=800"
-            alt="Elite Construction team at work"
-            className="rounded-2xl shadow-xl"
-          />
-          <div className="absolute -bottom-6 -left-6 orange-gradient-bg text-white p-8 rounded-2xl shadow-xl border border-white/20">
-            <div className="text-4xl font-bold text-white">25+</div>
-            <div className="text-sm font-medium">Years of Excellence</div>
+          <h3 className="text-3xl font-bold mb-4">
+            Ready to Work with the Best?
+          </h3>
+          <p className="text-slate-300 text-lg mb-8 max-w-2xl mx-auto">
+            Join hundreds of satisfied clients who have trusted us with their construction dreams. 
+            Let's discuss your project today.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button
+              size="lg"
+              variant="primary"
+              className="bg-orange-500 hover:bg-orange-600 text-white group"
+              onClick={() => navigate('/contact')}
+            >
+              Get Free Consultation
+              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Button>
+            <Button
+              size="lg"
+              variant="ghost"
+              className="border-2 border-white text-white hover:bg-white hover:text-slate-900"
+              onClick={() => navigate('/portfolio')}
+            >
+              View Our Work
+            </Button>
           </div>
         </motion.div>
-      </div>
-
-      {/* Team Section */}
-      <div className="text-center mb-16">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <h3 className="text-3xl md:text-4xl font-bold text-black-900 mb-6">
-            Meet Our <span className="text-primary-orange">Leadership Team</span>
-          </h3>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Our experienced team of professionals brings together decades of expertise in <span className="text-secondary-orange font-bold">construction</span>, <span className="text-primary-orange font-bold">design</span>, and project management.
-          </p>
-        </motion.div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-        {team.map((member, index) => (
-          <motion.div
-            key={member.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
-            viewport={{ once: true }}
-          >
-            <Card hover className="text-center h-full border border-gray-100 hover:border-primary-orange/30 hover:shadow-orange-glow transition-all duration-300">
-              <img
-                src={member.image}
-                alt={member.name}
-                className="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-primary-orange/20"
-              />
-              <h4 className="text-lg font-bold text-black-900 mb-2">{member.name}</h4>
-              <p className="text-primary-orange font-bold mb-3">{member.position}</p>
-              <p className="text-gray-600 text-sm mb-4 leading-relaxed">{member.bio}</p>
-              
-              <div className="space-y-1">
-                {member.certifications.map((cert, certIndex) => (
-                  <div key={certIndex} className="text-xs text-gray-500 bg-orange-50 px-2 py-1 rounded border border-primary-orange/20">
-                    {cert}
-                  </div>
-                ))}
-              </div>
-            </Card>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Company Stats */}
-      <div className="black-gradient-bg rounded-2xl p-8 md:p-12 text-white border border-primary-orange/20">
-        <div className="text-center mb-12">
-          <h3 className="text-3xl font-bold mb-4">Our Impact by the <span className="text-primary-orange">Numbers</span></h3>
-          <p className="text-gray-300">A quarter-century of building <span className="text-secondary-orange font-bold">excellence</span></p>
-        </div>
-        
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {[
-            { number: '500+', label: 'Projects Completed' },
-            { number: '25+', label: 'Years in Business' },
-            { number: '50+', label: 'Team Members' },
-            { number: '100%', label: 'Client Satisfaction' }
-          ].map((stat, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="text-center group"
-            >
-              <div className="text-3xl md:text-4xl font-bold text-primary-orange mb-2 group-hover:text-secondary-orange transition-colors">
-                {stat.number}
-              </div>
-              <div className="text-sm md:text-base text-gray-300 font-medium">
-                {stat.label}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
+      </Container>
     </Section>
   );
 };

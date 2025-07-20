@@ -1,472 +1,440 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { 
-  PhoneIcon, 
-  EnvelopeIcon, 
-  MapPinIcon, 
-  ClockIcon,
-  CheckCircleIcon 
-} from '@heroicons/react/24/outline';
+import { Container } from '../ui/Container';
 import { Section } from '../ui/Section';
-import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
-import { QuoteFormData } from '../../types';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { 
+  Phone, 
+  Mail, 
+  MapPin, 
+  Clock, 
+  Send, 
+  CheckCircle,
+  MessageSquare,
+  User,
+  Building
+} from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
-const schema = yup.object({
-  projectType: yup.string().required('Project type is required'),
-  location: yup.string().required('Location is required'),
-  squareFootage: yup.number().positive('Square footage must be positive').required('Square footage is required'),
-  finishLevel: yup.string().required('Finish level is required'),
-  timeline: yup.string().required('Timeline is required'),
-  budget: yup.string().required('Budget range is required'),
-  name: yup.string().required('Name is required'),
-  email: yup.string().email('Invalid email').required('Email is required'),
-  phone: yup.string().required('Phone number is required'),
-  message: yup.string()
-});
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  projectType: string;
+  budget: string;
+  timeline: string;
+  message: string;
+}
 
 export const Contact: React.FC = () => {
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    email: '',
+    phone: '',
+    projectType: '',
+    budget: '',
+    timeline: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [currentStep, setCurrentStep] = useState(1);
-  const location = useLocation();
   const navigate = useNavigate();
 
-  React.useEffect(() => {
-    if (location.state && location.state.scrollTo === 'contact') {
-      const section = document.getElementById('contact');
-      if (section) {
-        section.scrollIntoView({ behavior: 'smooth' });
-      }
-      // Clear state so it doesn't scroll again
-      navigate(location.pathname, { replace: true, state: {} });
-    }
-  }, [location, navigate]);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-    reset
-  } = useForm<QuoteFormData>({
-    resolver: yupResolver(schema)
-  });
-
-  const onSubmit = async (data: QuoteFormData) => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Simulate form submission
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    setIsSubmitting(false);
     setIsSubmitted(true);
+    
+    // Reset form after 3 seconds
     setTimeout(() => {
       setIsSubmitted(false);
-      reset();
-      setCurrentStep(1);
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        projectType: '',
+        budget: '',
+        timeline: '',
+        message: ''
+      });
     }, 3000);
   };
 
-  const nextStep = () => {
-    setCurrentStep(prev => Math.min(prev + 1, 4));
-  };
-
-  const prevStep = () => {
-    setCurrentStep(prev => Math.max(prev - 1, 1));
-  };
-
-  const watchedValues = watch();
+  const contactInfo = [
+    {
+      icon: Phone,
+      title: 'Phone',
+      details: '+1 (555) 123-4567',
+      subtext: 'Mon-Fri: 8AM-6PM'
+    },
+    {
+      icon: Mail,
+      title: 'Email',
+      details: 'info@eliteconstruction.com',
+      subtext: 'We respond within 24 hours'
+    },
+    {
+      icon: MapPin,
+      title: 'Office',
+      details: '123 Construction Ave, Los Angeles, CA 90210',
+      subtext: 'Visit our showroom'
+    },
+    {
+      icon: Clock,
+      title: 'Hours',
+      details: 'Monday - Friday: 8:00 AM - 6:00 PM',
+      subtext: 'Saturday: 9:00 AM - 4:00 PM'
+    }
+  ];
 
   return (
-    <Section id="contact" padding="xl">
-      <div className="text-center mb-16">
+    <Section id="contact" className="bg-gradient-to-br from-slate-50 to-white">
+      <Helmet>
+        <title>Contact Us | Elite Construction & Design</title>
+        <meta name="description" content="Get in touch with Elite Construction & Design for your custom home, renovation, or commercial construction project. Free consultations available." />
+        <script type="application/ld+json">{`
+          {
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "Elite Construction & Design",
+            "telephone": "+1-555-123-4567",
+            "email": "info@eliteconstruction.com",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "123 Construction Ave",
+              "addressLocality": "Los Angeles",
+              "addressRegion": "CA",
+              "postalCode": "90210",
+              "addressCountry": "US"
+            },
+            "openingHours": [
+              "Mo-Fr 08:00-18:00",
+              "Sa 09:00-16:00"
+            ]
+          }
+        `}</script>
+      </Helmet>
+      
+      <Container>
+        {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
+          className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-black-900 mb-6">
-            Start Your <span className="text-primary-orange">Dream Project</span> Today
+          <div className="inline-flex items-center gap-2 bg-orange-100 text-orange-600 px-4 py-2 rounded-full font-medium mb-6">
+            <MessageSquare className="w-4 h-4" />
+            <span>Get In Touch</span>
+          </div>
+          <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
+            Let's Build Something Amazing Together
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Ready to bring your vision to life? Get in touch with our team for a <span className="text-secondary-orange font-bold">free consultation</span> and detailed project quote.
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+            Ready to start your construction project? Contact our expert team for a free consultation 
+            and detailed quote tailored to your specific needs.
           </p>
         </motion.div>
-      </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-        {/* Contact Information */}
-        <div className="lg:col-span-1">
+        {/* Main Content - Split Layout */}
+        <div className="grid lg:grid-cols-2 gap-16 mb-16">
+          
+          {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
+            className="bg-white rounded-2xl shadow-xl p-8 border border-slate-100"
           >
-            <h3 className="text-2xl font-bold text-black-900 mb-8">Get in <span className="text-primary-orange">Touch</span></h3>
-            
-            <div className="space-y-6">
-              <div className="flex items-start group">
-                <PhoneIcon className="w-6 h-6 text-primary-orange mr-4 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform" />
-                <div>
-                  <h4 className="font-bold text-black-900 mb-1">Phone</h4>
-                  <a href="tel:+1-555-0123" className="text-gray-600 hover:text-primary-orange transition-colors">
-                    (555) 123-4567
-                  </a>
-                  <p className="text-sm text-gray-500">Mon-Fri 8AM-6PM</p>
+            {!isSubmitted ? (
+              <>
+                <div className="mb-8">
+                  <h3 className="text-2xl font-bold text-slate-900 mb-2">
+                    Get Your Free Quote
+                  </h3>
+                  <p className="text-slate-600">
+                    Fill out the form below and we'll get back to you within 24 hours.
+                  </p>
                 </div>
-              </div>
-              
-              <div className="flex items-start group">
-                <EnvelopeIcon className="w-6 h-6 text-primary-orange mr-4 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform" />
-                <div>
-                  <h4 className="font-bold text-black-900 mb-1">Email</h4>
-                  <a href="mailto:info@eliteconstruction.com" className="text-gray-600 hover:text-primary-orange transition-colors">
-                    info@eliteconstruction.com
-                  </a>
-                  <p className="text-sm text-gray-500">We'll respond within 24 hours</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start group">
-                <MapPinIcon className="w-6 h-6 text-primary-orange mr-4 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform" />
-                <div>
-                  <h4 className="font-bold text-black-900 mb-1">Office</h4>
-                  <p className="text-gray-600">123 Construction Ave<br />Los Angeles, CA 90210</p>
-                  <p className="text-sm text-gray-500">By appointment only</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start group">
-                <ClockIcon className="w-6 h-6 text-primary-orange mr-4 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform" />
-                <div>
-                  <h4 className="font-bold text-black-900 mb-1">Business Hours</h4>
-                  <p className="text-gray-600">Monday - Friday: 8:00 AM - 6:00 PM</p>
-                  <p className="text-gray-600">Saturday: 9:00 AM - 4:00 PM</p>
-                  <p className="text-gray-600">Sunday: Closed</p>
-                </div>
-              </div>
-            </div>
 
-            {/* Emergency Contact */}
-            <div className="mt-8 p-6 bg-red-50 rounded-lg border border-red-200">
-              <h4 className="font-bold text-red-900 mb-2">Emergency Contact</h4>
-              <p className="text-red-700 text-sm mb-2">
-                For existing project emergencies only
-              </p>
-              <a href="tel:+1-555-0124" className="font-bold text-red-900 hover:text-red-700 transition-colors">
-                (555) 123-HELP
-              </a>
-            </div>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-2">
+                        Full Name *
+                      </label>
+                      <div className="relative">
+                        <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleInputChange}
+                          required
+                          className="w-full pl-11 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                          placeholder="John Doe"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">
+                        Email Address *
+                      </label>
+                      <div className="relative">
+                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          required
+                          className="w-full pl-11 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                          placeholder="john@example.com"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="phone" className="block text-sm font-medium text-slate-700 mb-2">
+                        Phone Number
+                      </label>
+                      <div className="relative">
+                        <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
+                        <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleInputChange}
+                          className="w-full pl-11 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                          placeholder="(555) 123-4567"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label htmlFor="projectType" className="block text-sm font-medium text-slate-700 mb-2">
+                        Project Type *
+                      </label>
+                      <div className="relative">
+                        <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
+                        <select
+                          id="projectType"
+                          name="projectType"
+                          value={formData.projectType}
+                          onChange={handleInputChange}
+                          required
+                          className="w-full pl-11 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors appearance-none bg-white"
+                        >
+                          <option value="">Select Project Type</option>
+                          <option value="custom-home">Custom Home</option>
+                          <option value="renovation">Home Renovation</option>
+                          <option value="commercial">Commercial Project</option>
+                          <option value="addition">Home Addition</option>
+                          <option value="other">Other</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="budget" className="block text-sm font-medium text-slate-700 mb-2">
+                        Budget Range
+                      </label>
+                      <select
+                        id="budget"
+                        name="budget"
+                        value={formData.budget}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors appearance-none bg-white"
+                      >
+                        <option value="">Select Budget Range</option>
+                        <option value="under-100k">Under $100,000</option>
+                        <option value="100k-250k">$100,000 - $250,000</option>
+                        <option value="250k-500k">$250,000 - $500,000</option>
+                        <option value="500k-1m">$500,000 - $1,000,000</option>
+                        <option value="over-1m">Over $1,000,000</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label htmlFor="timeline" className="block text-sm font-medium text-slate-700 mb-2">
+                        Timeline
+                      </label>
+                      <select
+                        id="timeline"
+                        name="timeline"
+                        value={formData.timeline}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors appearance-none bg-white"
+                      >
+                        <option value="">Select Timeline</option>
+                        <option value="asap">ASAP</option>
+                        <option value="1-3-months">1-3 Months</option>
+                        <option value="3-6-months">3-6 Months</option>
+                        <option value="6-12-months">6-12 Months</option>
+                        <option value="planning-phase">Still Planning</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium text-slate-700 mb-2">
+                      Project Details
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      rows={4}
+                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors resize-none"
+                      placeholder="Tell us about your project vision, specific requirements, or any questions you have..."
+                    />
+                  </div>
+
+                  <Button
+                    type="submit"
+                    size="lg"
+                    variant="primary"
+                    disabled={isSubmitting}
+                    className="w-full bg-orange-500 hover:bg-orange-600 text-white group"
+                  >
+                    {isSubmitting ? (
+                      'Sending...'
+                    ) : (
+                      <>
+                        Send My Request
+                        <Send className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      </>
+                    )}
+                  </Button>
+                </form>
+              </>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="text-center py-12"
+              >
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <CheckCircle className="w-8 h-8 text-green-500" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-4">
+                  Thank You!
+                </h3>
+                <p className="text-slate-600 mb-6">
+                  We've received your request and will get back to you within 24 hours.
+                </p>
+                <Button
+                  variant="ghost"
+                  onClick={() => setIsSubmitted(false)}
+                  className="text-orange-600 hover:bg-orange-50"
+                >
+                  Send Another Message
+                </Button>
+              </motion.div>
+            )}
           </motion.div>
-        </div>
 
-        {/* Quote Form */}
-        <div className="lg:col-span-2">
+          {/* Contact Information */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
+            className="space-y-8"
           >
-            <Card className="p-8 border border-gray-200 hover:border-primary-orange/30 hover:shadow-orange-glow transition-all duration-300">
-              {isSubmitted ? (
-                <div className="text-center py-12">
-                  <CheckCircleIcon className="w-16 h-16 text-green-500 mx-auto mb-4" />
-                  <h3 className="text-2xl font-bold text-black-900 mb-4">Thank You!</h3>
-                  <p className="text-gray-600 mb-6">
-                    Your quote request has been submitted successfully. Our team will review your project details and contact you within <span className="text-primary-orange font-bold">24 hours</span>.
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    For immediate assistance, please call <span className="text-secondary-orange font-bold">(555) 123-4567</span>
-                  </p>
-                </div>
-              ) : (
-                <>
-                  <div className="mb-8">
-                    <h3 className="text-2xl font-bold text-black-900 mb-4">Get Your <span className="text-primary-orange">Free Quote</span></h3>
-                    
-                    {/* Progress Bar */}
-                    <div className="flex items-center mb-6">
-                      {[1, 2, 3, 4].map((step) => (
-                        <React.Fragment key={step}>
-                          <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all ${
-                            step <= currentStep 
-                              ? 'orange-gradient-bg text-white scale-110 shadow-lg' 
-                              : 'bg-gray-200 text-gray-500'
-                          }`}>
-                            {step}
-                          </div>
-                          {step < 4 && (
-                            <div className={`flex-1 h-1 mx-2 transition-all rounded-full ${
-                              step < currentStep ? 'orange-gradient-bg' : 'bg-gray-200'
-                            }`} />
-                          )}
-                        </React.Fragment>
-                      ))}
-                    </div>
-                    
-                    <div className="text-sm text-gray-600">
-                      Step <span className="text-primary-orange font-bold">{currentStep}</span> of 4: <span className="font-medium">{
-                        currentStep === 1 ? 'Project Details' :
-                        currentStep === 2 ? 'Specifications' :
-                        currentStep === 3 ? 'Timeline & Budget' :
-                        'Contact Information'
-                      }</span>
-                    </div>
-                  </div>
-
-                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                    {/* Step 1: Project Details */}
-                    {currentStep === 1 && (
-                      <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        className="space-y-6"
-                      >
-                        <div>
-                          <label className="block text-sm font-bold text-gray-700 mb-2">
-                            Project Type *
-                          </label>
-                          <select
-                            {...register('projectType')}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all"
-                          >
-                            <option value="">Select project type</option>
-                            <option value="custom-home">Custom Home Construction</option>
-                            <option value="renovation">Whole Home Renovation</option>
-                            <option value="kitchen">Kitchen Remodel</option>
-                            <option value="bathroom">Bathroom Renovation</option>
-                            <option value="addition">Home Addition</option>
-                            <option value="commercial">Commercial Project</option>
-                            <option value="other">Other</option>
-                          </select>
-                          {errors.projectType && (
-                            <p className="text-red-500 text-sm mt-1">{errors.projectType.message}</p>
-                          )}
-                        </div>
-
-                        <div>
-                          <label className="block text-sm font-bold text-gray-700 mb-2">
-                            Project Location *
-                          </label>
-                          <input
-                            type="text"
-                            {...register('location')}
-                            placeholder="City, State"
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all"
-                          />
-                          {errors.location && (
-                            <p className="text-red-500 text-sm mt-1">{errors.location.message}</p>
-                          )}
-                        </div>
-                      </motion.div>
-                    )}
-
-                    {/* Step 2: Specifications */}
-                    {currentStep === 2 && (
-                      <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        className="space-y-6"
-                      >
-                        <div>
-                          <label className="block text-sm font-bold text-gray-700 mb-2">
-                            Square Footage *
-                          </label>
-                          <input
-                            type="number"
-                            {...register('squareFootage')}
-                            placeholder="e.g., 2500"
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all"
-                          />
-                          {errors.squareFootage && (
-                            <p className="text-red-500 text-sm mt-1">{errors.squareFootage.message}</p>
-                          )}
-                        </div>
-
-                        <div>
-                          <label className="block text-sm font-bold text-gray-700 mb-2">
-                            Finish Level *
-                          </label>
-                          <select
-                            {...register('finishLevel')}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all"
-                          >
-                            <option value="">Select finish level</option>
-                            <option value="standard">Standard</option>
-                            <option value="premium">Premium</option>
-                            <option value="luxury">Luxury</option>
-                            <option value="ultra-luxury">Ultra Luxury</option>
-                          </select>
-                          {errors.finishLevel && (
-                            <p className="text-red-500 text-sm mt-1">{errors.finishLevel.message}</p>
-                          )}
-                        </div>
-                      </motion.div>
-                    )}
-
-                    {/* Step 3: Timeline & Budget */}
-                    {currentStep === 3 && (
-                      <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        className="space-y-6"
-                      >
-                        <div>
-                          <label className="block text-sm font-bold text-gray-700 mb-2">
-                            Desired Timeline *
-                          </label>
-                          <select
-                            {...register('timeline')}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all"
-                          >
-                            <option value="">Select timeline</option>
-                            <option value="asap">ASAP</option>
-                            <option value="1-3-months">1-3 months</option>
-                            <option value="3-6-months">3-6 months</option>
-                            <option value="6-12-months">6-12 months</option>
-                            <option value="flexible">Flexible</option>
-                          </select>
-                          {errors.timeline && (
-                            <p className="text-red-500 text-sm mt-1">{errors.timeline.message}</p>
-                          )}
-                        </div>
-
-                        <div>
-                          <label className="block text-sm font-bold text-gray-700 mb-2">
-                            Budget Range *
-                          </label>
-                          <select
-                            {...register('budget')}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all"
-                          >
-                            <option value="">Select budget range</option>
-                            <option value="under-100k">Under $100K</option>
-                            <option value="100k-250k">$100K - $250K</option>
-                            <option value="250k-500k">$250K - $500K</option>
-                            <option value="500k-1m">$500K - $1M</option>
-                            <option value="1m-plus">$1M+</option>
-                          </select>
-                          {errors.budget && (
-                            <p className="text-red-500 text-sm mt-1">{errors.budget.message}</p>
-                          )}
-                        </div>
-                      </motion.div>
-                    )}
-
-                    {/* Step 4: Contact Information */}
-                    {currentStep === 4 && (
-                      <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        className="space-y-6"
-                      >
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          <div>
-                            <label className="block text-sm font-bold text-gray-700 mb-2">
-                              Full Name *
-                            </label>
-                            <input
-                              type="text"
-                              {...register('name')}
-                              placeholder="John Doe"
-                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all"
-                            />
-                            {errors.name && (
-                              <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
-                            )}
-                          </div>
-
-                          <div>
-                            <label className="block text-sm font-bold text-gray-700 mb-2">
-                              Phone Number *
-                            </label>
-                            <input
-                              type="tel"
-                              {...register('phone')}
-                              placeholder="(555) 123-4567"
-                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all"
-                            />
-                            {errors.phone && (
-                              <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>
-                            )}
-                          </div>
-                        </div>
-
-                        <div>
-                          <label className="block text-sm font-bold text-gray-700 mb-2">
-                            Email Address *
-                          </label>
-                          <input
-                            type="email"
-                            {...register('email')}
-                            placeholder="john@example.com"
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all"
-                          />
-                          {errors.email && (
-                            <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
-                          )}
-                        </div>
-
-                        <div>
-                          <label className="block text-sm font-bold text-gray-700 mb-2">
-                            Additional Details
-                          </label>
-                          <textarea
-                            {...register('message')}
-                            rows={4}
-                            placeholder="Tell us more about your project vision, specific requirements, or any questions you have..."
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-orange focus:border-transparent transition-all"
-                          />
-                        </div>
-                      </motion.div>
-                    )}
-
-                    {/* Navigation Buttons */}
-                    <div className="flex justify-between pt-6">
-                      {currentStep > 1 && (
-                        <Button
-                          type="button"
-                          variant="ghost"
-                          darkBg={false}
-                          onClick={prevStep}
-                        >
-                          Previous
-                        </Button>
-                      )}
-                      
-                      <div className="ml-auto">
-                        {currentStep < 4 ? (
-                          <Button
-                            type="button"
-                            variant="secondary"
-                            darkBg={false}
-                            onClick={nextStep}
-                            disabled={
-                              (currentStep === 1 && (!watchedValues.projectType || !watchedValues.location)) ||
-                              (currentStep === 2 && (!watchedValues.squareFootage || !watchedValues.finishLevel)) ||
-                              (currentStep === 3 && (!watchedValues.timeline || !watchedValues.budget))
-                            }
-                          >
-                            Next
-                          </Button>
-                        ) : (
-                          <Button 
-                            type="submit"
-                            variant="primary"
-                          >
-                            Submit Quote Request
-                          </Button>
-                        )}
+            {/* Contact Info Cards */}
+            <div className="space-y-6">
+              {contactInfo.map((info, index) => {
+                const IconComponent = info.icon;
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="bg-white rounded-xl p-6 shadow-lg border border-slate-100 hover:shadow-xl transition-all duration-300"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <IconComponent className="w-6 h-6 text-orange-500" />
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-semibold text-slate-900 mb-1">{info.title}</h4>
+                        <p className="text-slate-700 font-medium mb-1">{info.details}</p>
+                        <p className="text-slate-500 text-sm">{info.subtext}</p>
                       </div>
                     </div>
-                  </form>
-                </>
-              )}
-            </Card>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Map Placeholder */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-xl shadow-lg border border-slate-100 overflow-hidden"
+            >
+              <div className="bg-gradient-to-br from-orange-100 to-orange-200 h-64 flex items-center justify-center">
+                <div className="text-center">
+                  <MapPin className="w-12 h-12 text-orange-500 mx-auto mb-4" />
+                  <h4 className="text-lg font-semibold text-slate-900 mb-2">Visit Our Office</h4>
+                  <p className="text-slate-600">123 Construction Ave<br />Los Angeles, CA 90210</p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Emergency Contact */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl p-6 text-white"
+            >
+              <h4 className="text-xl font-bold mb-2">Emergency Support</h4>
+              <p className="mb-4 text-orange-100">
+                Need immediate assistance? Our emergency team is available 24/7.
+              </p>
+              <a
+                href="tel:+1-555-123-4567"
+                className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition-colors"
+              >
+                <Phone className="w-5 h-5" />
+                <span className="font-semibold">Call Now: (555) 123-4567</span>
+              </a>
+            </motion.div>
           </motion.div>
         </div>
-      </div>
+      </Container>
     </Section>
   );
 };
