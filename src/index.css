@@ -1,6 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --primary-gold: #D78320;
+  --dark-navy: #0A1C2B;
+  --success-green: #059669;
+  --warning-amber: #F59E0B;
+  --neutral-slate: #64748B;
+  --accent-emerald: #10B981;
+}
+
+.heading-xl { font-size: clamp(2.5rem, 5vw, 4rem); font-family: 'Poppins', sans-serif; font-weight: 700; }
+.heading-lg { font-size: clamp(2rem, 4vw, 3rem); font-family: 'Poppins', sans-serif; font-weight: 600; }
+.heading-md { font-size: clamp(1.5rem, 3vw, 2rem); font-family: 'Inter', sans-serif; font-weight: 600; }
+
+.glass {
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+.gradient-gold {
+  background: linear-gradient(90deg, #D78320 0%, #F59E0B 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.animate-fade-in { animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
 /* Hide scrollbars but keep functionality */
 * {

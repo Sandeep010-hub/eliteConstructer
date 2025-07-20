@@ -5,8 +5,15 @@ import { Section } from '../ui/Section';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { blogPosts } from '../../data/blog';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { AnimatedHeading } from '../ui/AnimatedHeading';
 
 export const Blog: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isBlogPage = location.pathname === '/blog';
+  const postsToShow = isBlogPage ? blogPosts.slice(0, 5) : blogPosts.slice(0, 3);
+
   return (
     <Section id="blog" background="gray" padding="xl">
       <div className="text-center mb-16">
@@ -16,17 +23,17 @@ export const Blog: React.FC = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-navy-900 mb-6">
+          <AnimatedHeading as="h2" className="text-4xl md:text-5xl mb-6">
             Construction Insights & Tips
-          </h2>
+          </AnimatedHeading>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Stay informed with the latest construction trends, renovation tips, and industry insights from our expert team.
           </p>
         </motion.div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-        {blogPosts.map((post, index) => (
+      <div className={`grid ${postsToShow.length === 3 ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4'} gap-8 mb-12`}>
+        {postsToShow.map((post, index) => (
           <motion.div
             key={post.id}
             initial={{ opacity: 0, y: 20 }}
@@ -75,7 +82,12 @@ export const Blog: React.FC = () => {
                 })}
               </div>
               
-              <Button variant="ghost" size="sm" className="w-full">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="w-full"
+                darkBg={false}
+              >
                 Read More
               </Button>
             </Card>
@@ -84,7 +96,12 @@ export const Blog: React.FC = () => {
       </div>
 
       <div className="text-center">
-        <Button variant="secondary" size="lg">
+        <Button 
+          variant="secondary" 
+          size="lg"
+          darkBg={false}
+          onClick={() => navigate('/blog')}
+        >
           View All Articles
         </Button>
       </div>

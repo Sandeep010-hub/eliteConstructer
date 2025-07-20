@@ -5,6 +5,7 @@ import { Section } from '../ui/Section';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { blogPosts } from '../../data/blog';
+import { useNavigate } from 'react-router-dom';
 
 interface BlogProps {
   setCurrentPage?: (page: string) => void;
@@ -22,6 +23,8 @@ export const Blog: React.FC<BlogProps> = ({ setCurrentPage }) => {
       }, 100);
     }
   };
+
+  const navigate = useNavigate();
 
   return (
     <div className="pt-20">
@@ -90,7 +93,13 @@ export const Blog: React.FC<BlogProps> = ({ setCurrentPage }) => {
                   })}
                 </div>
                 
-                <Button variant="ghost" size="sm" className="w-full">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="w-full"
+                  darkBg={false}
+                  onClick={() => navigate(`/blog/${post.id || ''}`)}
+                >
                   Read More
                 </Button>
               </Card>
@@ -100,9 +109,9 @@ export const Blog: React.FC<BlogProps> = ({ setCurrentPage }) => {
 
         <div className="text-center">
           <Button 
-            variant="secondary" 
+            variant="primary" 
             size="lg"
-            onClick={handleContactNavigation}
+            onClick={() => navigate('/contact')}
           >
             Contact Us for More Information
           </Button>

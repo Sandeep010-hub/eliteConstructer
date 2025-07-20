@@ -4,6 +4,7 @@ import { CheckCircleIcon, CreditCardIcon, BanknotesIcon, DocumentTextIcon } from
 import { Section } from '../ui/Section';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
+import { useNavigate } from 'react-router-dom';
 
 const financingOptions = [
   {
@@ -60,6 +61,7 @@ const lendingPartners = [
 ];
 
 export const Financing: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <div className="pt-20">
       {/* Hero Section */}
@@ -386,14 +388,14 @@ export const Financing: React.FC = () => {
       <Section padding="xl">
         <Card className="bg-navy-900 text-white text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Finance Your Project?</h2>
-          <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
+          <p className="text-gray-700 mb-8 max-w-2xl mx-auto">
             Get pre-qualified today and take the first step toward making your construction or renovation dreams a reality.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-gold-500 hover:bg-gold-600 text-navy-900">
+            <Button size="lg" variant="primary" className="w-full sm:w-auto" onClick={() => navigate('/contact')}>
               Get Pre-Qualified Now
             </Button>
-            <Button variant="ghost" size="lg" className="text-white border-white hover:bg-white hover:text-navy-900">
+            <Button size="lg" variant="secondary" className="w-full sm:w-auto" onClick={() => navigate('/financing-specialist')}>
               Speak with Financing Specialist
             </Button>
           </div>

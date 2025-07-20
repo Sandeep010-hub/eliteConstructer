@@ -14,6 +14,7 @@ import { Section } from '../ui/Section';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { QuoteFormData } from '../../types';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const schema = yup.object({
   projectType: yup.string().required('Project type is required'),
@@ -31,6 +32,19 @@ const schema = yup.object({
 export const Contact: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (location.state && location.state.scrollTo === 'contact') {
+      const section = document.getElementById('contact');
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+      // Clear state so it doesn't scroll again
+      navigate(location.pathname, { replace: true, state: {} });
+    }
+  }, [location, navigate]);
 
   const {
     register,
@@ -43,8 +57,6 @@ export const Contact: React.FC = () => {
   });
 
   const onSubmit = async (data: QuoteFormData) => {
-    // Simulate form submission
-    console.log('Form submitted:', data);
     setIsSubmitted(true);
     setTimeout(() => {
       setIsSubmitted(false);
@@ -416,8 +428,8 @@ export const Contact: React.FC = () => {
                         <Button
                           type="button"
                           variant="ghost"
+                          darkBg={true}
                           onClick={prevStep}
-                          className="hover:scale-105 transition-transform"
                         >
                           Previous
                         </Button>
@@ -427,8 +439,9 @@ export const Contact: React.FC = () => {
                         {currentStep < 4 ? (
                           <Button
                             type="button"
+                            variant="ghost"
+                            darkBg={true}
                             onClick={nextStep}
-                            className="hover:scale-105 transition-transform"
                             disabled={
                               (currentStep === 1 && (!watchedValues.projectType || !watchedValues.location)) ||
                               (currentStep === 2 && (!watchedValues.squareFootage || !watchedValues.finishLevel)) ||
@@ -440,7 +453,7 @@ export const Contact: React.FC = () => {
                         ) : (
                           <Button 
                             type="submit"
-                            className="hover:scale-105 transition-transform"
+                            variant="primary"
                           >
                             Submit Quote Request
                           </Button>

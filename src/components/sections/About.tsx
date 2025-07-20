@@ -4,6 +4,7 @@ import { CheckCircleIcon } from '@heroicons/react/24/solid';
 import { Section } from '../ui/Section';
 import { Card } from '../ui/Card';
 import { team } from '../../data/team';
+import { AnimatedHeading } from '../ui/AnimatedHeading';
 
 export const About: React.FC = () => {
   return (
@@ -16,9 +17,9 @@ export const About: React.FC = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-navy-900 mb-6">
+          <AnimatedHeading as="h2" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-snug text-navy-900 mb-6 break-keep text-center max-w-6xl mx-auto px-4 lg:whitespace-nowrap">
             Building Excellence Since 1995
-          </h2>
+          </AnimatedHeading>
           <p className="text-lg text-gray-600 mb-6 leading-relaxed">
             Founded with a vision to deliver uncompromising quality and craftsmanship, Elite Construction & Design has grown to become one of Southern California's most respected construction companies. Our journey began with a simple belief: every project deserves exceptional attention to detail and personalized service.
           </p>

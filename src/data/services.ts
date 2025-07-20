@@ -4,7 +4,7 @@ export const services: Service[] = [
   {
     id: '1',
     title: 'Custom Home Construction',
-    description: 'Build your dream home from the ground up with our expert team and premium materials.',
+    description: 'Build your dream home from the ground up with expert craftsmanship and premium materials.',
     icon: 'home',
     category: 'residential',
     startingPrice: '$500K',
@@ -21,7 +21,7 @@ export const services: Service[] = [
   {
     id: '2',
     title: 'Whole Home Renovations',
-    description: 'Transform your existing home with comprehensive renovation services.',
+    description: 'Transform your entire home with comprehensive renovations for modern comfort and style.',
     icon: 'wrench',
     category: 'residential',
     startingPrice: '$200K',
@@ -38,7 +38,7 @@ export const services: Service[] = [
   {
     id: '3',
     title: 'Kitchen Remodeling',
-    description: 'Create the heart of your home with custom kitchen design and installation.',
+    description: 'Elevate your kitchen with custom design, premium finishes, and seamless installation.',
     icon: 'utensils',
     category: 'residential',
     startingPrice: '$75K',
@@ -55,7 +55,7 @@ export const services: Service[] = [
   {
     id: '4',
     title: 'Bathroom Renovations',
-    description: 'Luxury bathroom transformations with spa-like amenities and modern fixtures.',
+    description: 'Indulge in luxury with spa-inspired bathroom remodels and high-end modern fixtures.',
     icon: 'bath',
     category: 'residential',
     startingPrice: '$45K',
@@ -72,7 +72,7 @@ export const services: Service[] = [
   {
     id: '5',
     title: 'Commercial Construction',
-    description: 'Professional commercial building services for offices, retail, and industrial spaces.',
+    description: 'Professional building solutions for offices, retail, and industrial spaces—on time, on budget.',
     icon: 'building',
     category: 'commercial',
     startingPrice: '$2M',
@@ -89,7 +89,7 @@ export const services: Service[] = [
   {
     id: '6',
     title: 'Home Additions',
-    description: 'Expand your living space with seamless additions that match your existing home.',
+    description: 'Expand your living space with seamless additions that blend perfectly with your home.',
     icon: 'plus',
     category: 'residential',
     startingPrice: '$150K',
@@ -106,7 +106,7 @@ export const services: Service[] = [
   {
     id: '7',
     title: 'Outdoor Living Spaces',
-    description: 'Create stunning outdoor environments with pools, patios, and landscaping.',
+    description: 'Create stunning outdoor environments with pools, patios, and custom landscaping.',
     icon: 'tree',
     category: 'specialty',
     startingPrice: '$100K',
@@ -123,7 +123,7 @@ export const services: Service[] = [
   {
     id: '8',
     title: 'Green Building Solutions',
-    description: 'Sustainable construction practices for environmentally conscious projects.',
+    description: 'Build sustainably with eco-friendly materials and practices for a healthier environment.',
     icon: 'leaf',
     category: 'specialty',
     startingPrice: 'Varies',

@@ -4,12 +4,16 @@ import { HomeIcon, PhoneIcon, EnvelopeIcon } from '@heroicons/react/24/outline';
 import { Section } from '../ui/Section';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
+import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 interface NotFoundProps {
   setCurrentPage?: (page: string) => void;
 }
 
 export const NotFound: React.FC<NotFoundProps> = ({ setCurrentPage }) => {
+  const navigate = useNavigate();
+
   const handleNavigation = (page: string) => {
     if (setCurrentPage) {
       setCurrentPage(page);
@@ -19,6 +23,37 @@ export const NotFound: React.FC<NotFoundProps> = ({ setCurrentPage }) => {
 
   return (
     <div className="pt-20">
+      <Helmet>
+        <meta name="robots" content="noindex" />
+        <script type="application/ld+json">{`
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Elite Construction & Design",
+      "image": "https://eliteconstruction.com/og-image.jpg",
+      "@id": "https://eliteconstruction.com",
+      "url": "https://eliteconstruction.com",
+      "telephone": "+1-555-0123",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "123 Construction Ave",
+        "addressLocality": "Los Angeles",
+        "addressRegion": "CA",
+        "postalCode": "90210",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 34.0522,
+        "longitude": -118.2437
+      },
+      "sameAs": [
+        "https://instagram.com/eliteconstruction",
+        "https://facebook.com/eliteconstruction"
+      ]
+    }
+  `}</script>
+      </Helmet>
       <Section padding="xl">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
@@ -35,7 +70,7 @@ export const NotFound: React.FC<NotFoundProps> = ({ setCurrentPage }) => {
             <h1 className="text-4xl md:text-5xl font-bold text-navy-900 mb-6">
               Page Under Construction
             </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
               Oops! It looks like this page is still under construction. Just like our building projects, we're working hard to get everything perfect.
             </p>
 
@@ -43,8 +78,9 @@ export const NotFound: React.FC<NotFoundProps> = ({ setCurrentPage }) => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
               <Button 
                 size="lg" 
-                onClick={() => handleNavigation('home')}
-                className="flex items-center"
+                variant="primary"
+                className="flex items-center w-full sm:w-auto font-bold"
+                onClick={() => navigate('/')}
               >
                 <HomeIcon className="w-5 h-5 mr-2" />
                 Go Home
@@ -52,7 +88,8 @@ export const NotFound: React.FC<NotFoundProps> = ({ setCurrentPage }) => {
               <Button 
                 variant="secondary" 
                 size="lg"
-                onClick={() => handleNavigation('contact')}
+                className="w-full sm:w-auto font-bold"
+                onClick={() => navigate('/contact')}
               >
                 Contact Us
               </Button>
@@ -101,24 +138,29 @@ export const NotFound: React.FC<NotFoundProps> = ({ setCurrentPage }) => {
           >
             <Card className="bg-navy-900 text-white">
               <h2 className="text-2xl font-bold mb-6">Need Immediate Help?</h2>
-              <p className="text-gray-300 mb-8">
+              <p className="text-gray-700 mb-8">
                 Our team is here to help you find what you're looking for or answer any questions about our construction services.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <a
                   href="tel:+1-555-0123"
+                  aria-label="Call Elite Construction"
                   className="flex items-center justify-center bg-gold-500 hover:bg-gold-600 text-navy-900 font-semibold py-3 px-6 rounded-lg transition-colors duration-200"
                 >
                   <PhoneIcon className="w-5 h-5 mr-2" />
                   Call (555) 123-4567
                 </a>
-                <a
+                <Button
+                  as="a"
                   href="mailto:info@eliteconstruction.com"
-                  className="flex items-center justify-center bg-white/10 hover:bg-white/20 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200"
+                  aria-label="Email Elite Construction"
+                  variant="secondary"
+                  size="lg"
+                  className="w-full font-bold flex items-center justify-center"
                 >
                   <EnvelopeIcon className="w-5 h-5 mr-2" />
                   Send Email
-                </a>
+                </Button>
               </div>
             </Card>
           </motion.div>

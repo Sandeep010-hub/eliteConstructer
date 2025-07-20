@@ -1,54 +1,37 @@
 import React from 'react';
 import { PhoneIcon, EnvelopeIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import { Container } from '../ui/Container';
+import { Link } from 'react-router-dom';
+import { Instagram, Facebook } from 'lucide-react';
 
 const footerNavigation = {
   services: [
-    { name: 'Custom Homes', href: 'custom-homes' },
-    { name: 'Renovations', href: 'renovations' },
-    { name: 'Kitchen Remodeling', href: 'renovations' },
-    { name: 'Bathroom Renovations', href: 'renovations' },
-    { name: 'Commercial Construction', href: 'commercial' },
+    { name: 'Custom Homes', href: '/custom-homes' },
+    { name: 'Renovations', href: '/renovations' },
+    { name: 'Kitchen Remodeling', href: '/renovations' },
+    { name: 'Bathroom Renovations', href: '/renovations' },
+    { name: 'Commercial Construction', href: '/commercial' },
   ],
   company: [
-    { name: 'About Us', href: 'about' },
-    { name: 'Our Process', href: 'process' },
-    { name: 'Portfolio', href: 'portfolio' },
-    { name: 'Testimonials', href: 'testimonials' },
-    { name: 'Careers', href: 'careers' },
+    { name: 'About Us', href: '/about' },
+    { name: 'Our Process', href: '/process' },
+    { name: 'Portfolio', href: '/portfolio' },
+    { name: 'Testimonials', href: '/testimonials' },
+    { name: 'Careers', href: '/careers' },
   ],
   resources: [
-    { name: 'Blog', href: 'blog' },
-    { name: 'Financing', href: 'financing' },
-    { name: 'Process', href: 'process' },
-    { name: 'Contact', href: 'contact' },
+    { name: 'Blog', href: '/blog' },
+    { name: 'Financing', href: '/financing' },
+    { name: 'Process', href: '/process' },
+    { name: 'Contact', href: '/contact' },
   ],
   legal: [
-    { name: 'Privacy Policy', href: 'privacy' },
-    { name: 'Terms of Service', href: 'terms' },
+    { name: 'Privacy Policy', href: '/privacy' },
+    { name: 'Terms of Service', href: '/terms' },
   ],
 };
 
-interface FooterProps {
-  setCurrentPage: (page: string) => void;
-}
-
-export const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
-  const handleNavigation = (page: string) => {
-    setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const scrollToSection = (sectionId: string) => {
-    setCurrentPage('home');
-    setTimeout(() => {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 100);
-  };
-
+export const Footer: React.FC = () => {
   return (
     <footer className="bg-navy-900 text-white">
       <Container>
@@ -56,10 +39,7 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
             {/* Company Info */}
             <div className="lg:col-span-2">
-              <div 
-                className="flex items-center space-x-3 mb-6 cursor-pointer group"
-                onClick={() => handleNavigation('home')}
-              >
+              <Link to="/" className="flex items-center space-x-3 mb-6 cursor-pointer group">
                 <div className="w-12 h-12 bg-gold-500 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
                   <span className="text-navy-900 font-bold text-xl">E</span>
                 </div>
@@ -67,7 +47,7 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
                   <div className="font-bold text-white text-lg">Elite Construction</div>
                   <div className="text-sm text-gray-300">& Design</div>
                 </div>
-              </div>
+              </Link>
               <p className="text-gray-300 mb-6 max-w-md leading-relaxed">
                 Crafting exceptional spaces since 1995. We deliver premium construction and renovation services with uncompromising quality and attention to detail.
               </p>
@@ -92,78 +72,56 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
                 </div>
               </div>
             </div>
-
             {/* Services */}
             <div>
               <h3 className="font-semibold text-lg mb-4">Services</h3>
               <ul className="space-y-2">
                 {footerNavigation.services.map((item) => (
                   <li key={item.name}>
-                    <button 
-                      onClick={() => {
-                        if (item.href === 'services') {
-                          scrollToSection('services');
-                        } else {
-                          handleNavigation(item.href);
-                        }
-                      }}
-                      className="text-gray-300 hover:text-gold-500 transition-colors text-left hover:translate-x-1 transform duration-200"
+                    <Link 
+                      to={item.href}
+                      className="text-gray-300 hover:text-gold-500 transition-colors text-left hover:translate-x-1 transform duration-200 block"
                     >
                       {item.name}
-                    </button>
+                    </Link>
                   </li>
                 ))}
               </ul>
             </div>
-
             {/* Company */}
             <div>
               <h3 className="font-semibold text-lg mb-4">Company</h3>
               <ul className="space-y-2">
                 {footerNavigation.company.map((item) => (
                   <li key={item.name}>
-                    <button 
-                      onClick={() => {
-                        if (['about', 'portfolio', 'testimonials'].includes(item.href)) {
-                          scrollToSection(item.href);
-                        } else {
-                          handleNavigation(item.href);
-                        }
-                      }}
-                      className="text-gray-300 hover:text-gold-500 transition-colors text-left hover:translate-x-1 transform duration-200"
+                    <Link 
+                      to={item.href}
+                      className="text-gray-300 hover:text-gold-500 transition-colors text-left hover:translate-x-1 transform duration-200 block"
                     >
                       {item.name}
-                    </button>
+                    </Link>
                   </li>
                 ))}
               </ul>
             </div>
-
             {/* Resources */}
             <div>
               <h3 className="font-semibold text-lg mb-4">Resources</h3>
               <ul className="space-y-2">
                 {footerNavigation.resources.map((item) => (
                   <li key={item.name}>
-                    <button 
-                      onClick={() => {
-                        if (['blog', 'about'].includes(item.href)) {
-                          scrollToSection(item.href);
-                        } else {
-                          handleNavigation(item.href);
-                        }
-                      }}
-                      className="text-gray-300 hover:text-gold-500 transition-colors text-left hover:translate-x-1 transform duration-200"
+                    <Link 
+                      to={item.href}
+                      className="text-gray-300 hover:text-gold-500 transition-colors text-left hover:translate-x-1 transform duration-200 block"
                     >
                       {item.name}
-                    </button>
+                    </Link>
                   </li>
                 ))}
               </ul>
             </div>
           </div>
         </div>
-
         {/* Bottom Bar */}
         <div className="border-t border-gray-700 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
@@ -172,19 +130,25 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
             </div>
             <div className="flex space-x-6">
               {footerNavigation.legal.map((item) => (
-                <button
+                <Link
                   key={item.name}
-                  onClick={() => handleNavigation(item.href)}
+                  to={item.href}
                   className="text-gray-300 hover:text-gold-500 transition-colors text-sm hover:underline"
                 >
                   {item.name}
-                </button>
+                </Link>
               ))}
             </div>
           </div>
-          <div className="mt-4 text-center text-gray-400 text-sm">
-            <p>Licensed General Contractor #123456 | Bonded & Insured</p>
-            <p>Serving Los Angeles, Orange County, and surrounding areas</p>
+          <div className="mt-4 text-center">
+            <div className="flex justify-center space-x-6">
+              <a href="https://instagram.com/eliteconstruction" target="_blank" rel="noopener noreferrer" aria-label="Follow on Instagram" className="text-gray-300 hover:text-gold-500 transition-colors text-2xl">
+                <Instagram className="w-7 h-7" />
+              </a>
+              <a href="https://facebook.com/eliteconstruction" target="_blank" rel="noopener noreferrer" aria-label="Follow on Facebook" className="text-gray-300 hover:text-gold-500 transition-colors text-2xl">
+                <Facebook className="w-7 h-7" />
+              </a>
+            </div>
           </div>
         </div>
       </Container>

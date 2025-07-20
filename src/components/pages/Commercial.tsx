@@ -4,6 +4,7 @@ import { CheckCircleIcon, BuildingOfficeIcon, CogIcon, ShieldCheckIcon } from '@
 import { Section } from '../ui/Section';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
+import { useNavigate } from 'react-router-dom';
 
 const commercialServices = [
   {
@@ -57,6 +58,7 @@ const projectTypes = [
 ];
 
 export const Commercial: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <div className="pt-20">
       {/* Hero Section */}
@@ -76,19 +78,16 @@ export const Commercial: React.FC = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <Button 
                 size="lg"
-                onClick={() => {
-                  const contactSection = document.getElementById('contact');
-                  if (contactSection) {
-                    contactSection.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
+                variant="primary"
+                onClick={() => navigate('/contact')}
               >
                 Request Project Consultation
               </Button>
               <Button 
                 variant="secondary" 
                 size="lg"
-                onClick={() => setCurrentPage && setCurrentPage('portfolio')}
+                darkBg={false}
+                onClick={() => navigate('/portfolio')}
               >
                 View Commercial Portfolio
               </Button>
@@ -155,7 +154,7 @@ export const Commercial: React.FC = () => {
                   </ul>
                 </div>
 
-                <Button variant="secondary" className="w-full">
+                <Button variant="primary" className="w-full" onClick={() => navigate('/contact')}>
                   Learn More About {service.title}
                 </Button>
               </Card>
@@ -211,7 +210,7 @@ export const Commercial: React.FC = () => {
                   </ul>
                 </div>
 
-                <Button variant="secondary" className="w-full">
+                <Button variant="primary" className="w-full" onClick={() => navigate('/contact')}>
                   Get {type.category} Quote
                 </Button>
               </Card>
@@ -349,10 +348,10 @@ export const Commercial: React.FC = () => {
             Let's discuss your commercial construction needs and develop a plan that meets your timeline, budget, and quality requirements.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-gold-500 hover:bg-gold-600 text-navy-900">
+            <Button size="lg" variant="primary" onClick={() => navigate('/contact')}>
               Schedule Project Consultation
             </Button>
-            <Button variant="ghost" size="lg" className="text-white border-white hover:bg-white hover:text-navy-900">
+            <Button variant="secondary" size="lg" className="w-full sm:w-auto" onClick={() => navigate('/commercial-quote')}>
               Request Commercial Quote
             </Button>
           </div>

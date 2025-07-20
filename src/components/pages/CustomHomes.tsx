@@ -4,6 +4,7 @@ import { CheckCircleIcon, HomeIcon, SparklesIcon, CogIcon } from '@heroicons/rea
 import { Section } from '../ui/Section';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
+import { useNavigate } from 'react-router-dom';
 
 const customHomeFeatures = [
   {
@@ -63,6 +64,7 @@ const buildingProcess = [
 ];
 
 export const CustomHomes: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <div className="pt-20">
       {/* Hero Section */}
@@ -79,22 +81,20 @@ export const CustomHomes: React.FC = () => {
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
               Build the home of your dreams with our expert team. From initial design to final walkthrough, we'll guide you through every step of creating your perfect custom home.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 size="lg"
-                onClick={() => {
-                  const contactSection = document.getElementById('contact');
-                  if (contactSection) {
-                    contactSection.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
+                variant="primary"
+                className="w-full sm:w-auto font-bold"
+                onClick={() => navigate('/contact')}
               >
                 Schedule Design Consultation
               </Button>
               <Button 
                 variant="secondary" 
                 size="lg"
-                onClick={() => setCurrentPage && setCurrentPage('portfolio')}
+                className="w-full sm:w-auto font-bold"
+                onClick={() => navigate('/portfolio')}
               >
                 View Custom Home Gallery
               </Button>
@@ -294,7 +294,7 @@ export const CustomHomes: React.FC = () => {
                     </li>
                   ))}
                 </ul>
-                <Button variant="secondary" className="w-full mt-6">
+                <Button variant="primary" className="w-full mt-6" onClick={() => navigate('/contact')}>
                   Get Detailed Quote
                 </Button>
               </Card>
@@ -307,14 +307,14 @@ export const CustomHomes: React.FC = () => {
       <Section padding="xl">
         <Card className="bg-navy-900 text-white text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Build Your Dream Home?</h2>
-          <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
+          <p className="text-gray-700 mb-8 max-w-2xl mx-auto">
             Let's discuss your vision and create a custom home that perfectly fits your lifestyle and budget.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-gold-500 hover:bg-gold-600 text-navy-900">
+            <Button size="lg" variant="primary" className="w-full sm:w-auto font-bold" onClick={() => navigate('/contact')}>
               Schedule Design Consultation
             </Button>
-            <Button variant="ghost" size="lg" className="text-white border-white hover:bg-white hover:text-navy-900">
+            <Button variant="secondary" size="lg" className="w-full sm:w-auto font-bold" onClick={() => navigate('/custom-homes-guide')}>
               Download Custom Home Guide
             </Button>
           </div>

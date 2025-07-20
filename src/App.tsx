@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import ScrollToTop from './ScrollToTop';
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { Hero } from './components/sections/Hero';
@@ -18,65 +20,63 @@ import { Privacy } from './components/pages/Privacy';
 import { Terms } from './components/pages/Terms';
 import { NotFound } from './components/pages/NotFound';
 import { Blog as BlogPage } from './components/pages/Blog';
+import { HelmetProvider, Helmet } from 'react-helmet-async';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('home');
-
-  const renderPage = () => {
-    switch (currentPage) {
-      case 'home':
-        return (
-          <>
-            <Hero setCurrentPage={setCurrentPage} />
-            <Services setCurrentPage={setCurrentPage} />
-            <Portfolio setCurrentPage={setCurrentPage} />
-            <About />
-            <Testimonials />
-            <Blog />
-            <Contact />
-          </>
-        );
-      case 'services':
-        return <Services setCurrentPage={setCurrentPage} />;
-      case 'custom-homes':
-        return <CustomHomes setCurrentPage={setCurrentPage} />;
-      case 'renovations':
-        return <Renovations setCurrentPage={setCurrentPage} />;
-      case 'commercial':
-        return <Commercial setCurrentPage={setCurrentPage} />;
-      case 'portfolio':
-        return <Portfolio setCurrentPage={setCurrentPage} />;
-      case 'about':
-        return <About />;
-      case 'process':
-        return <Process setCurrentPage={setCurrentPage} />;
-      case 'testimonials':
-        return <Testimonials />;
-      case 'blog':
-        return <BlogPage setCurrentPage={setCurrentPage} />;
-      case 'contact':
-        return <Contact />;
-      case 'careers':
-        return <Careers setCurrentPage={setCurrentPage} />;
-      case 'financing':
-        return <Financing setCurrentPage={setCurrentPage} />;
-      case 'privacy':
-        return <Privacy />;
-      case 'terms':
-        return <Terms />;
-      default:
-        return <NotFound setCurrentPage={setCurrentPage} />;
-    }
-  };
-
   return (
-    <div className="min-h-screen">
-      <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
-      <main>
-        {renderPage()}
-      </main>
-      <Footer setCurrentPage={setCurrentPage} />
-    </div>
+    <HelmetProvider>
+      <Helmet>
+        <title>Elite Construction & Design | Southern California Builders</title>
+        <meta name="description" content="Elite Construction & Design delivers premium custom homes, renovations, and commercial projects in Los Angeles and Orange County. Uncompromising quality, on-time delivery, and client satisfaction." />
+        <meta property="og:title" content="Elite Construction & Design | Southern California Builders" />
+        <meta property="og:description" content="Elite Construction & Design delivers premium custom homes, renovations, and commercial projects in Los Angeles and Orange County. Uncompromising quality, on-time delivery, and client satisfaction." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://eliteconstruction.com" />
+        <meta property="og:image" content="https://eliteconstruction.com/og-image.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Elite Construction & Design | Southern California Builders" />
+        <meta name="twitter:description" content="Elite Construction & Design delivers premium custom homes, renovations, and commercial projects in Los Angeles and Orange County. Uncompromising quality, on-time delivery, and client satisfaction." />
+        <meta name="twitter:image" content="https://eliteconstruction.com/og-image.jpg" />
+        <link rel="canonical" href="https://eliteconstruction.com" />
+      </Helmet>
+      <Router>
+        <ScrollToTop />
+        <div className="min-h-screen">
+          <Header />
+          <main>
+            <Routes>
+              <Route path="/" element={
+                <>
+                  <Hero />
+                  <Services />
+                  <Portfolio />
+                  <About />
+                  <Testimonials />
+                  <Blog />
+                  <Contact />
+                </>
+              } />
+              <Route path="/services" element={<Services />} />
+              <Route path="/custom-homes" element={<CustomHomes />} />
+              <Route path="/renovations" element={<Renovations />} />
+              <Route path="/commercial" element={<Commercial />} />
+              <Route path="/portfolio" element={<Portfolio />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/process" element={<Process />} />
+              <Route path="/testimonials" element={<Testimonials />} />
+              <Route path="/blog" element={<BlogPage />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/careers" element={<Careers />} />
+              <Route path="/financing" element={<Financing />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </HelmetProvider>
   );
 }
 

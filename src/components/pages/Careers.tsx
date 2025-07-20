@@ -4,6 +4,7 @@ import { CheckCircleIcon, UserGroupIcon, AcademicCapIcon, HeartIcon } from '@her
 import { Section } from '../ui/Section';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
+import { useNavigate } from 'react-router-dom';
 
 const openPositions = [
   {
@@ -63,6 +64,7 @@ const benefits = [
 ];
 
 export const Careers: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <div className="pt-20">
       {/* Hero Section */}
@@ -79,7 +81,9 @@ export const Careers: React.FC = () => {
             <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
               Build your career with Elite Construction & Design. We're looking for talented professionals who share our commitment to excellence and quality craftsmanship.
             </p>
-            <Button size="lg">View Open Positions</Button>
+            <Button size="lg" variant="primary" onClick={() => navigate('/careers')}>
+              View Open Positions
+            </Button>
           </motion.div>
         </div>
 
@@ -329,10 +333,10 @@ export const Careers: React.FC = () => {
             Join our team of construction professionals and help us continue building exceptional spaces across Southern California.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-gold-500 hover:bg-gold-600 text-navy-900">
+            <Button size="lg" variant="primary" onClick={() => navigate('/careers')}>
               View All Positions
             </Button>
-            <Button variant="ghost" size="lg" className="text-white border-white hover:bg-white hover:text-navy-900">
+            <Button variant="ghost" size="lg" darkBg={true} onClick={() => navigate('/careers-application')}>
               Submit General Application
             </Button>
           </div>

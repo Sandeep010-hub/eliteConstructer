@@ -4,6 +4,7 @@ import { CheckCircleIcon, ClockIcon, UserGroupIcon, DocumentTextIcon, WrenchScre
 import { Section } from '../ui/Section';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
+import { useNavigate } from 'react-router-dom';
 
 const processSteps = [
   {
@@ -57,6 +58,7 @@ const processSteps = [
 ];
 
 export const Process: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <div className="pt-20">
       <Section padding="xl">
@@ -178,23 +180,19 @@ export const Process: React.FC = () => {
 
         {/* CTA Section */}
         <div className="mt-20 text-center">
-          <Card className="bg-navy-900 text-white">
+          <Card className="bg-navy-900 text-white text-center">
             <h2 className="text-3xl font-bold mb-4">Ready to Start Your Project?</h2>
-            <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
+            <p className="text-gray-700 mb-8 max-w-2xl mx-auto">
               Let's discuss your vision and how our proven process can bring it to life. Schedule your free consultation today.
             </p>
-            <Button 
-              size="lg" 
-              className="bg-gold-500 hover:bg-gold-600 text-navy-900"
-              onClick={() => {
-                const contactSection = document.getElementById('contact');
-                if (contactSection) {
-                  contactSection.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
-            >
-              Schedule Free Consultation
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg" variant="primary" className="w-full sm:w-auto" onClick={() => navigate('/contact')}>
+                Schedule Free Consultation
+              </Button>
+              <Button size="lg" variant="secondary" className="w-full sm:w-auto" onClick={() => navigate('/process-quote')}>
+                Get Process Quote
+              </Button>
+            </div>
           </Card>
         </div>
       </Section>

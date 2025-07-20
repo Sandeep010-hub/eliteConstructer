@@ -6,6 +6,8 @@ import { Section } from '../ui/Section';
 import { Button } from '../ui/Button';
 import { projects } from '../../data/projects';
 import { Project } from '../../types';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { AnimatedHeading } from '../ui/AnimatedHeading';
 
 const categories = [
   { id: 'all', name: 'All Projects' },
@@ -18,10 +20,24 @@ interface PortfolioProps {
   setCurrentPage?: (page: string) => void;
 }
 
-export const Portfolio: React.FC<PortfolioProps> = ({ setCurrentPage }) => {
+export const Portfolio: React.FC<PortfolioProps> = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (location.state && location.state.scrollTo === 'portfolio') {
+      const section = document.getElementById('portfolio');
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+      // Clear state so it doesn't scroll again
+      navigate(location.pathname, { replace: true, state: {} });
+    }
+  }, [location, navigate]);
 
   const filteredProjects = activeCategory === 'all' 
     ? projects 
@@ -71,9 +87,9 @@ export const Portfolio: React.FC<PortfolioProps> = ({ setCurrentPage }) => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-navy-900 mb-6">
+          <AnimatedHeading as="h2" className="text-4xl md:text-5xl mb-6 text-navy-900">
             Our Portfolio
-          </h2>
+          </AnimatedHeading>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Explore our collection of exceptional projects that showcase our commitment to quality, innovation, and craftsmanship.
           </p>
@@ -83,17 +99,20 @@ export const Portfolio: React.FC<PortfolioProps> = ({ setCurrentPage }) => {
       {/* Category Filter */}
       <div className="flex flex-wrap justify-center gap-4 mb-12">
         {categories.map((category) => (
-          <button
+          <Button
             key={category.id}
-            onClick={() => setActiveCategory(category.id)}
-            className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105 ${
+            variant="secondary"
+            size="sm"
+            darkBg={false}
+            className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
               activeCategory === category.id
-                ? 'bg-navy-900 text-white shadow-lg'
-                : 'bg-white text-gray-700 hover:bg-navy-50 border border-gray-200 hover:border-navy-200'
+                ? 'bg-white border-primary-gold text-primary-gold shadow-lg'
+                : 'bg-white text-navy-900 border border-gray-200 hover:bg-navy-50 hover:border-primary-gold'
             }`}
+            onClick={() => setActiveCategory(category.id)}
           >
             {category.name}
-          </button>
+          </Button>
         ))}
       </div>
 
@@ -135,10 +154,9 @@ export const Portfolio: React.FC<PortfolioProps> = ({ setCurrentPage }) => {
       {/* View More Button */}
       <div className="text-center mt-12">
         <Button 
-          variant="secondary" 
+          variant="primary" 
           size="lg"
-          className="hover:scale-105 transition-transform"
-          onClick={handleGetQuote}
+          onClick={() => navigate('/contact')}
         >
           Start Your Project Today
         </Button>

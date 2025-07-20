@@ -4,6 +4,7 @@ import { CheckCircleIcon, HomeIcon, WrenchScrewdriverIcon, SparklesIcon } from '
 import { Section } from '../ui/Section';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
+import { useNavigate } from 'react-router-dom';
 
 const renovationTypes = [
   {
@@ -57,6 +58,7 @@ const beforeAfterProjects = [
 
 export const Renovations: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState(0);
+  const navigate = useNavigate();
 
   return (
     <div className="pt-20">
@@ -77,19 +79,16 @@ export const Renovations: React.FC = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 size="lg"
-                onClick={() => {
-                  const contactSection = document.getElementById('contact');
-                  if (contactSection) {
-                    contactSection.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
+                variant="primary"
+                onClick={() => navigate('/contact')}
               >
                 Get Free Renovation Quote
               </Button>
               <Button 
                 variant="secondary" 
                 size="lg"
-                onClick={() => setCurrentPage && setCurrentPage('portfolio')}
+                darkBg={false}
+                onClick={() => navigate('/portfolio')}
               >
                 View Before & After Gallery
               </Button>
@@ -171,7 +170,7 @@ export const Renovations: React.FC = () => {
                   </ul>
                 </div>
 
-                <Button variant="secondary" className="w-full">
+                <Button variant="primary" className="w-full" onClick={() => navigate('/contact')}>
                   Get Quote for {type.title}
                 </Button>
               </Card>
@@ -336,14 +335,14 @@ export const Renovations: React.FC = () => {
       <Section background="gray" padding="xl">
         <Card className="bg-navy-900 text-white text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Home?</h2>
-          <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
+          <p className="text-gray-700 mb-8 max-w-2xl mx-auto">
             Let's discuss your renovation goals and create a plan that brings your vision to life while adding value to your home.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-gold-500 hover:bg-gold-600 text-navy-900">
+            <Button size="lg" variant="primary" className="w-full sm:w-auto" onClick={() => navigate('/contact')}>
               Schedule Free Consultation
             </Button>
-            <Button variant="ghost" size="lg" className="text-white border-white hover:bg-white hover:text-navy-900">
+            <Button size="lg" variant="secondary" className="w-full sm:w-auto" onClick={() => navigate('/renovations-quote')}>
               Get Renovation Quote
             </Button>
           </div>

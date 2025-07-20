@@ -11,6 +11,8 @@ import { Button } from '../ui/Button';
 import { Card } from '../ui/Card';
 import { Section } from '../ui/Section';
 import { services } from '../../data/services';
+import { useNavigate } from 'react-router-dom';
+import { AnimatedHeading } from '../ui/AnimatedHeading';
 
 const iconMap = {
   home: HomeIcon,
@@ -36,6 +38,7 @@ interface ServicesProps {
 
 export const Services: React.FC<ServicesProps> = ({ setCurrentPage }) => {
   const [activeCategory, setActiveCategory] = useState('all');
+  const navigate = useNavigate();
 
   const filteredServices = activeCategory === 'all' 
     ? services 
@@ -47,7 +50,7 @@ export const Services: React.FC<ServicesProps> = ({ setCurrentPage }) => {
         setCurrentPage('custom-homes');
       } else if (serviceTitle.includes('Renovation') || serviceTitle.includes('Kitchen') || serviceTitle.includes('Bathroom')) {
         setCurrentPage('renovations');
-      } else if (serviceTitle.includes('Commercial')) {
+      } else if (service.title.toLowerCase().includes('commercial')) {
         setCurrentPage('commercial');
       } else {
         // Scroll to contact for other services
@@ -76,9 +79,9 @@ export const Services: React.FC<ServicesProps> = ({ setCurrentPage }) => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-navy-900 mb-6">
-            Comprehensive Construction Solutions
-          </h2>
+          <AnimatedHeading as="h2" className="text-4xl md:text-5xl mb-6 text-navy-900">
+            Our Services
+          </AnimatedHeading>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             From concept to completion, we deliver excellence in every project with uncompromising quality and attention to detail.
           </p>
@@ -106,7 +109,13 @@ export const Services: React.FC<ServicesProps> = ({ setCurrentPage }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         {filteredServices.map((service, index) => {
           const IconComponent = iconMap[service.icon as keyof typeof iconMap] || HomeIcon;
-          
+          let detailPath = '/services';
+          if (service.title.toLowerCase().includes('custom')) detailPath = '/custom-homes';
+          else if (service.title.toLowerCase().includes('renovation') || service.title.toLowerCase().includes('remodel')) detailPath = '/renovations';
+          else if (service.title.toLowerCase().includes('commercial')) detailPath = '/commercial';
+          else if (service.title.toLowerCase().includes('outdoor')) detailPath = '/outdoor-living';
+          else if (service.title.toLowerCase().includes('green')) detailPath = '/green-building';
+          else detailPath = '/contact';
           return (
             <motion.div
               key={service.id}
@@ -115,36 +124,33 @@ export const Services: React.FC<ServicesProps> = ({ setCurrentPage }) => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card hover className="h-full group">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-navy-900 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <IconComponent className="w-8 h-8 text-gold-500" />
+              <Card hover className="h-full flex flex-col items-center text-center bg-white rounded-2xl shadow-xl p-8">
+                <div className="w-16 h-16 bg-navy-900 rounded-full flex items-center justify-center mb-6">
+                  <IconComponent className="w-8 h-8 text-gold-500" />
+                </div>
+                <h3 className="text-xl font-bold text-navy-900 mb-3">
+                  {service.title}
+                </h3>
+                <p className="text-gray-600 mb-6 text-base leading-relaxed line-clamp-3">
+                  {service.description}
+                </p>
+                <div className="w-full flex flex-col gap-2 mb-6">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-500 font-medium">Starting from:</span>
+                    <span className="font-bold text-navy-900">{service.startingPrice}</span>
                   </div>
-                  
-                  <h3 className="text-xl font-bold text-navy-900 mb-3 group-hover:text-gold-600 transition-colors">
-                    {service.title}
-                  </h3>
-                  
-                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">
-                    {service.description}
-                  </p>
-                  
-                  <div className="space-y-2 mb-6">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-500">Starting from:</span>
-                      <span className="font-semibold text-navy-900">{service.startingPrice}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-500">Timeline:</span>
-                      <span className="font-semibold text-navy-900">{service.timeline}</span>
-                    </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-500 font-medium">Timeline:</span>
+                    <span className="font-bold text-navy-900">{service.timeline}</span>
                   </div>
-                  
-                  <Button 
-                    variant="secondary" 
-                    size="sm" 
-                    className="w-full hover:scale-105 transition-transform"
-                    onClick={() => handleServiceClick(service.title)}
+                </div>
+                <div className="mt-auto w-full">
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    className="w-full"
+                    darkBg={false}
+                    onClick={() => navigate(detailPath)}
                   >
                     Learn More
                   </Button>
@@ -221,8 +227,8 @@ export const Services: React.FC<ServicesProps> = ({ setCurrentPage }) => {
           </p>
           <Button 
             size="lg" 
-            className="bg-gold-500 hover:bg-gold-600 text-navy-900 hover:scale-105 transition-transform"
-            onClick={scrollToContact}
+            variant="primary"
+            onClick={() => navigate('/contact')}
           >
             Get Free Quote Today
           </Button>
