@@ -79,11 +79,11 @@ export const Services: React.FC<ServicesProps> = ({ setCurrentPage }) => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <AnimatedHeading as="h2" className="text-4xl md:text-5xl mb-6 text-black-900">
-            Our Construction Services
+          <AnimatedHeading as="h2" className="text-4xl md:text-5xl mb-6 text-navy-900">
+            Our Services
           </AnimatedHeading>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            From concept to completion, we deliver excellence in every project with <span className="text-primary-orange font-bold">uncompromising quality</span> and attention to detail.
+            From concept to completion, we deliver excellence in every project with uncompromising quality and attention to detail.
           </p>
         </motion.div>
       </div>
@@ -94,10 +94,10 @@ export const Services: React.FC<ServicesProps> = ({ setCurrentPage }) => {
           <button
             key={category.id}
             onClick={() => setActiveCategory(category.id)}
-            className={`px-8 py-4 rounded-full font-bold transition-all duration-300 hover:scale-105 transform ${
+            className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105 ${
               activeCategory === category.id
-                ? 'orange-gradient-bg text-white shadow-lg hover:shadow-orange-glow'
-                : 'bg-white text-gray-700 hover:bg-orange-50 border-2 border-gray-200 hover:border-primary-orange hover:text-primary-orange'
+                ? 'bg-navy-900 text-white shadow-lg'
+                : 'bg-white text-gray-700 hover:bg-navy-50 border border-gray-200 hover:border-navy-200'
             }`}
           >
             {category.name}
@@ -124,24 +124,24 @@ export const Services: React.FC<ServicesProps> = ({ setCurrentPage }) => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card hover className="h-full flex flex-col items-center text-center bg-white rounded-2xl shadow-xl hover:shadow-orange-glow p-8 border border-gray-100 hover:border-primary-orange/30 transition-all duration-300">
-                <div className="w-20 h-20 orange-gradient-bg rounded-2xl flex items-center justify-center mb-6 shadow-lg">
-                  <IconComponent className="w-10 h-10 text-white" />
+              <Card hover className="h-full flex flex-col items-center text-center bg-white rounded-2xl shadow-xl p-8">
+                <div className="w-16 h-16 bg-navy-900 rounded-full flex items-center justify-center mb-6">
+                  <IconComponent className="w-8 h-8 text-gold-500" />
                 </div>
-                <h3 className="text-xl font-bold text-black-900 mb-3">
+                <h3 className="text-xl font-bold text-navy-900 mb-3">
                   {service.title}
                 </h3>
                 <p className="text-gray-600 mb-6 text-base leading-relaxed line-clamp-3">
                   {service.description}
                 </p>
-                <div className="w-full flex flex-col gap-3 mb-6 bg-light-gray rounded-lg p-4">
+                <div className="w-full flex flex-col gap-2 mb-6">
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-500 font-medium">Starting from:</span>
-                    <span className="font-bold text-primary-orange">{service.startingPrice}</span>
+                    <span className="font-bold text-navy-900">{service.startingPrice}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-500 font-medium">Timeline:</span>
-                    <span className="font-bold text-secondary-orange">{service.timeline}</span>
+                    <span className="font-bold text-navy-900">{service.timeline}</span>
                   </div>
                 </div>
                 <div className="mt-auto w-full">
@@ -164,8 +164,8 @@ export const Services: React.FC<ServicesProps> = ({ setCurrentPage }) => {
       {/* Why Choose Us */}
       <div className="mt-20">
         <div className="text-center mb-12">
-          <h3 className="text-3xl font-bold text-black-900 mb-4">Why Choose <span className="text-primary-orange">Elite Construction</span>?</h3>
-          <p className="text-lg text-gray-600">The difference is in the <span className="text-secondary-orange font-bold">details</span></p>
+          <h3 className="text-3xl font-bold text-navy-900 mb-4">Why Choose Elite Construction?</h3>
+          <p className="text-lg text-gray-600">The difference is in the details</p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -208,9 +208,9 @@ export const Services: React.FC<ServicesProps> = ({ setCurrentPage }) => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="text-center h-full hover:shadow-orange-glow transition-shadow group border border-gray-100 hover:border-primary-orange/30">
-                <div className="text-5xl mb-6 group-hover:scale-110 transition-transform">{benefit.icon}</div>
-                <h4 className="text-lg font-bold text-black-900 mb-3">{benefit.title}</h4>
+              <Card className="text-center h-full hover:shadow-xl transition-shadow group">
+                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">{benefit.icon}</div>
+                <h4 className="text-lg font-bold text-navy-900 mb-3">{benefit.title}</h4>
                 <p className="text-gray-600 text-sm">{benefit.description}</p>
               </Card>
             </motion.div>
@@ -220,16 +220,15 @@ export const Services: React.FC<ServicesProps> = ({ setCurrentPage }) => {
 
       {/* CTA Section */}
       <div className="mt-16 text-center">
-        <Card className="black-gradient-bg text-white border border-primary-orange/20">
-          <h3 className="text-2xl font-bold mb-4">Ready to Start Your <span className="text-primary-orange">Dream Project</span>?</h3>
+        <Card className="bg-navy-900 text-white">
+          <h3 className="text-2xl font-bold mb-4">Ready to Start Your Project?</h3>
           <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-            Get a <span className="text-secondary-orange font-bold">free consultation</span> and detailed quote for your construction or renovation project.
+            Get a free consultation and detailed quote for your construction or renovation project.
           </p>
           <Button 
             size="lg" 
             variant="primary"
             onClick={() => navigate('/contact')}
-            className="transform hover:scale-105"
           >
             Get Free Quote Today
           </Button>

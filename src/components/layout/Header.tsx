@@ -31,58 +31,58 @@ export const Header: React.FC = () => {
   const getNavbarStyles = () => {
     if (isHomePage) {
       return scrolled 
-        ? 'bg-white/95 backdrop-blur-xl shadow-lg py-3 border-b border-gray-200' 
-        : 'bg-transparent py-4';
+        ? 'bg-white/30 backdrop-blur-xl shadow-lg py-3' 
+        : 'bg-transparent py-3';
     } else {
-      return 'bg-white shadow-lg py-3 border-b border-gray-200';
+      return 'bg-white shadow-lg py-3';
     }
   };
 
   const getTextColor = (isActive = false) => {
     if (isHomePage) {
       if (scrolled) {
-        return isActive ? 'text-black-900 font-bold' : 'text-gray-700 hover:text-primary-orange';
+        return isActive ? 'text-navy-900 font-bold' : 'text-gray-700 hover:text-navy-900';
       } else {
-        return isActive ? 'text-primary-orange font-bold text-shadow-dark' : 'text-white hover:text-primary-orange text-shadow-dark';
+        return isActive ? 'text-gold-500 font-bold' : 'text-white hover:text-gold-500';
       }
     } else {
-      return isActive ? 'text-black-900 font-bold' : 'text-gray-700 hover:text-primary-orange';
+      return isActive ? 'text-navy-900 font-bold' : 'text-gray-700 hover:text-navy-900';
     }
   };
 
   const getLogoStyles = () => {
     if (isHomePage) {
-      return scrolled ? 'orange-gradient-bg' : 'bg-white/20 backdrop-blur-sm border border-white/30';
+      return scrolled ? 'bg-navy-900' : 'bg-white/20 backdrop-blur-sm';
     } else {
-      return 'orange-gradient-bg';
+      return 'bg-navy-900';
     }
   };
 
   const getLogoTextColor = () => {
     if (isHomePage) {
-      return scrolled ? 'text-black-900' : 'text-white';
+      return scrolled ? 'text-navy-900' : 'text-white';
     } else {
-      return 'text-black-900';
+      return 'text-navy-900';
     }
   };
 
   const getPhoneColor = () => {
     if (isHomePage) {
       return scrolled 
-        ? 'text-black-900 hover:text-primary-orange' 
-        : 'text-white hover:text-primary-orange text-shadow-dark';
+        ? 'text-navy-900 hover:text-gold-500' 
+        : 'text-white hover:text-gold-500';
     } else {
-      return 'text-black-900 hover:text-primary-orange';
+      return 'text-navy-900 hover:text-gold-500';
     }
   };
 
   const getButtonStyles = () => {
     if (isHomePage) {
       return scrolled 
-        ? 'btn-orange-primary' 
-        : 'btn-orange-primary';
+        ? 'bg-navy-900 hover:bg-navy-800 text-white' 
+        : 'bg-gold-500 hover:bg-gold-600 text-navy-900';
     } else {
-      return 'btn-orange-primary';
+      return 'bg-navy-900 hover:bg-navy-800 text-white';
     }
   };
 
@@ -114,9 +114,9 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className={`fixed w-full z-50 transition-all duration-500 ease-out ${getNavbarStyles()}`}>
+    <header className={`fixed w-full z-50 transition-all duration-[1000ms] ease-[cubic-bezier(0.77,0,0.175,1)] ${getNavbarStyles()}`}>
       <Container>
-        <nav className="flex items-center justify-between transition-all duration-500 ease-out">
+        <nav className="flex items-center justify-between transition-all duration-700 ease-[cubic-bezier(0.77,0,0.175,1)]">
           {/* Logo */}
           <button
             type="button"
@@ -133,12 +133,12 @@ export const Header: React.FC = () => {
             style={{ background: 'none' }}
           >
             <div className="flex items-center space-x-3">
-              <div className={`w-14 h-14 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-105 group-hover:shadow-orange-glow ${getLogoStyles()}`}>
-                <span className="text-white font-bold text-2xl">E</span>
+              <div className={`w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-105 ${getLogoStyles()}`}>
+                <span className="text-white font-bold text-xl">E</span>
               </div>
               <div>
-                <div className={`font-bold text-xl transition-colors duration-300 ${getLogoTextColor()}`}>Elite Construction</div>
-                <div className={`text-sm font-medium transition-colors duration-300 ${isHomePage ? (scrolled ? 'text-gray-600' : 'text-white/90') : 'text-gray-600'}`}>& Design</div>
+                <div className={`font-bold text-lg transition-colors duration-300 ${getLogoTextColor()}`}>Elite Construction</div>
+                <div className={`text-xs transition-colors duration-300 ${isHomePage ? (scrolled ? 'text-gray-600' : 'text-white/80') : 'text-gray-600'}`}>& Design</div>
               </div>
             </div>
           </button>
@@ -150,10 +150,10 @@ export const Header: React.FC = () => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`font-bold transition-all duration-300 relative group px-3 py-2 ${getTextColor(location.pathname === item.href)}`}
+                  className={`font-medium transition-all duration-300 relative group px-2 py-1 ${getTextColor(location.pathname === item.href)}`}
                 >
                   {item.name}
-                  <span className={`absolute -bottom-1 left-0 h-1 bg-primary-orange rounded-full will-change-width transition-all duration-500 ease-out ${location.pathname === item.href ? 'w-full' : 'w-0 group-hover:w-full'}`} />
+                  <span className={`absolute -bottom-1 left-0 h-0.5 bg-gold-500 will-change-width transition-all duration-500 ease-in-out ${location.pathname === item.href ? 'w-full' : 'w-0 group-hover:w-full'}`} />
                 </Link>
               ) : (
                 <button
@@ -167,10 +167,10 @@ export const Header: React.FC = () => {
                     }
                     setMobileMenuOpen(false);
                   }}
-                  className={`font-bold transition-all duration-300 relative group px-3 py-2 ${getTextColor(location.pathname === '/')}`}
+                  className={`font-medium transition-all duration-300 relative group px-2 py-1 ${getTextColor(location.pathname === '/')}`}
                 >
                   {item.name}
-                  <span className={`absolute -bottom-1 left-0 h-1 bg-primary-orange rounded-full will-change-width transition-all duration-500 ease-out ${location.pathname === '/' ? 'w-full' : 'w-0 group-hover:w-full'}`} />
+                  <span className={`absolute -bottom-1 left-0 h-0.5 bg-gold-500 will-change-width transition-all duration-500 ease-in-out ${location.pathname === '/' ? 'w-full' : 'w-0 group-hover:w-full'}`} />
                 </button>
               )
             ))}
@@ -180,7 +180,7 @@ export const Header: React.FC = () => {
           <div className="hidden lg:flex items-center space-x-4">
             <Link 
               to="/contact"
-              className="btn-orange-primary px-8 py-3 rounded-lg font-bold shadow-lg text-white border-2 border-transparent hover:border-white/20 transition-all duration-300 transform hover:-translate-y-1"
+              className="px-8 py-3 rounded-lg font-bold shadow-lg bg-gradient-gold text-white border border-transparent hover:opacity-90 hover:border-white transition-all duration-300"
             >
               Get Free Quote
             </Link>
@@ -190,7 +190,7 @@ export const Header: React.FC = () => {
           <div className="lg:hidden">
             <button
               type="button"
-              className={`transition-colors duration-300 p-2 rounded-lg hover:bg-primary-orange/10 ${getMobileButtonColor()}`}
+              className={`transition-colors duration-300 p-2 rounded-lg hover:bg-white/10 ${getMobileButtonColor()}`}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? (
@@ -204,13 +204,13 @@ export const Header: React.FC = () => {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="lg:hidden mt-4 pb-4 bg-white/95 backdrop-blur-md rounded-xl shadow-xl border border-gray-200">
+          <div className="lg:hidden mt-4 pb-4 bg-white/95 backdrop-blur-md rounded-lg shadow-lg">
             <div className="space-y-2 px-4 py-4">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`block w-full text-left font-bold py-3 px-4 rounded-lg transition-colors duration-300 ${location.pathname === item.href ? 'text-white bg-primary-orange shadow-lg' : 'text-gray-700 hover:text-primary-orange hover:bg-orange-50'}`}
+                  className={`block w-full text-left font-medium py-3 px-2 rounded-lg transition-colors duration-300 ${location.pathname === item.href ? 'text-navy-900 font-bold bg-gold-100' : 'text-gray-700 hover:text-navy-900 hover:bg-gray-100'}`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.name}
@@ -219,7 +219,7 @@ export const Header: React.FC = () => {
               <div className="pt-4 border-t border-gray-200">
                 <Link 
                   to="/contact"
-                  className="w-full block text-center btn-orange-primary text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:-translate-y-1"
+                  className="w-full block text-center bg-gold-500 hover:bg-gold-600 text-navy-900 font-semibold py-3 px-6 rounded-lg transition-colors duration-200"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Get Free Quote

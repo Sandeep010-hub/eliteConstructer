@@ -23,11 +23,11 @@ export const Blog: React.FC = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <AnimatedHeading as="h2" className="text-4xl md:text-5xl mb-6 text-black-900">
-            Construction <span className="text-primary-orange">Insights</span> & Tips
+          <AnimatedHeading as="h2" className="text-4xl md:text-5xl mb-6">
+            Construction Insights & Tips
           </AnimatedHeading>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Stay informed with the latest construction trends, <span className="text-secondary-orange font-bold">renovation tips</span>, and industry insights from our expert team.
+            Stay informed with the latest construction trends, renovation tips, and industry insights from our expert team.
           </p>
         </motion.div>
       </div>
@@ -41,7 +41,7 @@ export const Blog: React.FC = () => {
             transition={{ duration: 0.6, delay: index * 0.1 }}
             viewport={{ once: true }}
           >
-            <Card hover className="h-full border border-gray-100 hover:border-primary-orange/30 hover:shadow-orange-glow transition-all duration-300">
+            <Card hover className="h-full">
               <img
                 src={post.image}
                 alt={post.title}
@@ -49,12 +49,12 @@ export const Blog: React.FC = () => {
               />
               
               <div className="mb-3">
-                <span className="inline-block orange-gradient-bg text-white text-xs font-bold px-3 py-1 rounded-full">
+                <span className="inline-block bg-navy-900 text-white text-xs px-3 py-1 rounded-full">
                   {post.category}
                 </span>
               </div>
               
-              <h3 className="text-lg font-bold text-black-900 mb-3 line-clamp-2">
+              <h3 className="text-lg font-bold text-navy-900 mb-3 line-clamp-2">
                 {post.title}
               </h3>
               
@@ -64,28 +64,26 @@ export const Blog: React.FC = () => {
               
               <div className="flex items-center justify-between text-xs text-gray-500 mb-4">
                 <div className="flex items-center">
-                  <UserIcon className="w-4 h-4 mr-1 text-primary-orange" />
-                  <span className="font-medium">{post.author}</span>
+                  <UserIcon className="w-4 h-4 mr-1" />
+                  {post.author}
                 </div>
                 <div className="flex items-center">
-                  <ClockIcon className="w-4 h-4 mr-1 text-secondary-orange" />
-                  <span className="font-medium">{post.readTime} min read</span>
+                  <ClockIcon className="w-4 h-4 mr-1" />
+                  {post.readTime} min read
                 </div>
               </div>
               
               <div className="flex items-center text-xs text-gray-500 mb-4">
-                <CalendarIcon className="w-4 h-4 mr-1 text-primary-orange" />
-                <span className="font-medium">
-                  {new Date(post.publishDate).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}
-                </span>
+                <CalendarIcon className="w-4 h-4 mr-1" />
+                {new Date(post.publishDate).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
               </div>
               
               <Button 
-                variant="secondary" 
+                variant="ghost" 
                 size="sm" 
                 className="w-full"
                 darkBg={false}
@@ -103,7 +101,6 @@ export const Blog: React.FC = () => {
           size="lg"
           darkBg={false}
           onClick={() => navigate('/blog')}
-          className="transform hover:scale-105"
         >
           View All Articles
         </Button>

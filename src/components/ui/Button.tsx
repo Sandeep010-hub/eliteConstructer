@@ -17,17 +17,17 @@ export const Button: React.FC<ButtonProps> = ({
   darkBg = false,
   ...props
 }) => {
-  const base = 'inline-flex items-center justify-center font-bold rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-orange transform hover:-translate-y-1';
+  const base = 'inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-gold';
   const variants = {
-    primary: 'btn-orange-primary text-white font-bold shadow-lg border-2 border-transparent hover:border-white/20 transition-all duration-300',
-    secondary: `btn-orange-secondary ${darkBg ? 'text-white border-white hover:bg-white hover:text-primary-orange' : 'text-primary-orange border-primary-orange hover:bg-primary-orange hover:text-white'} font-bold shadow-lg transition-all duration-300`,
-    glass: `glass ${darkBg ? 'text-white text-shadow-dark font-bold' : 'text-black-900 font-bold'} border border-white/30 hover:border-primary-orange hover:text-primary-orange hover:shadow-orange-glow hover:bg-white/10 hover:backdrop-blur-xl transition-all duration-300`,
-    ghost: `${darkBg ? 'text-white font-bold' : 'text-black-900 font-bold'} bg-transparent hover:bg-primary-orange/10 hover:text-primary-orange transition-all duration-300`,
+    primary: 'bg-gradient-gold text-white font-bold shadow-lg border border-transparent hover:opacity-90 hover:border-white transition-all duration-300',
+    secondary: `${darkBg ? 'text-white font-bold' : 'text-navy-900 font-bold'} glass border border-gold-500 hover:text-primary-gold hover:border-primary-gold hover:bg-white/10 shadow-lg transition-all duration-300`,
+    glass: `glass ${darkBg ? 'text-white text-shadow-lg font-bold' : 'text-navy-900 font-bold'} border border-white/30 hover:border-primary-gold hover:text-primary-gold hover:shadow-gold-500/40 hover:bg-white/10 hover:backdrop-blur-xl transition-all duration-300`,
+    ghost: `${darkBg ? 'text-white font-bold' : 'text-navy-900 font-bold'} bg-transparent hover:bg-white/10 hover:text-primary-gold transition-all duration-300`,
   };
   const sizeClasses = {
     sm: 'px-4 py-2 text-sm h-8',
     md: 'px-6 py-3 text-base h-11',
-    lg: 'px-8 py-4 text-lg h-14 font-bold'
+    lg: 'px-8 py-4 text-lg h-14'
   };
 
   return (

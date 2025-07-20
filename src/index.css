@@ -1,110 +1,40 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --primary-orange: #FF6B35;
-  --secondary-orange: #FF8500;
-  --dark-black: #1A1A1A;
-  --light-gray: #F5F5F5;
-  --dark-gray: #4A4A4A;
+  --primary-gold: #D78320;
+  --dark-navy: #0A1C2B;
   --success-green: #059669;
   --warning-amber: #F59E0B;
   --neutral-slate: #64748B;
-  --accent-orange: #FF8500;
+  --accent-emerald: #10B981;
 }
 
-.heading-xl { 
-  font-size: clamp(2.5rem, 5vw, 4rem); 
-  font-family: 'Poppins', sans-serif; 
-  font-weight: 800;
-  color: var(--dark-black);
-}
-
-.heading-lg { 
-  font-size: clamp(2rem, 4vw, 3rem); 
-  font-family: 'Poppins', sans-serif; 
-  font-weight: 700;
-  color: var(--dark-black);
-}
-
-.heading-md { 
-  font-size: clamp(1.5rem, 3vw, 2rem); 
-  font-family: 'Poppins', sans-serif; 
-  font-weight: 600;
-  color: var(--dark-black);
-}
+.heading-xl { font-size: clamp(2.5rem, 5vw, 4rem); font-family: 'Poppins', sans-serif; font-weight: 700; }
+.heading-lg { font-size: clamp(2rem, 4vw, 3rem); font-family: 'Poppins', sans-serif; font-weight: 600; }
+.heading-md { font-size: clamp(1.5rem, 3vw, 2rem); font-family: 'Inter', sans-serif; font-weight: 600; }
 
 .glass {
   background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%);
-  box-shadow: 0 8px 32px 0 rgba(255, 107, 53, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(8px);
   border-radius: 1rem;
   border: 1px solid rgba(255,255,255,0.18);
 }
 
-.gradient-orange {
-  background: linear-gradient(90deg, #FF6B35 0%, #FF8500 100%);
+.gradient-gold {
+  background: linear-gradient(90deg, #D78320 0%, #F59E0B 100%);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
 }
 
-.text-shadow-dark {
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.text-shadow-light {
-  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
-}
-
 .animate-fade-in { animation: fadeIn 0.3s ease; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-.orange-glow {
-  box-shadow: 0 0 30px rgba(255, 107, 53, 0.3);
-}
-
-.orange-gradient-bg {
-  background: linear-gradient(135deg, #FF6B35 0%, #FF8500 100%);
-}
-
-.black-gradient-bg {
-  background: linear-gradient(135deg, #1A1A1A 0%, #000000 100%);
-}
-
-/* Orange Construction Theme Button Styles */
-.btn-orange-primary {
-  background: linear-gradient(135deg, #FF6B35 0%, #FF8500 100%);
-  color: white;
-  font-weight: 700;
-  border: 2px solid transparent;
-  transition: all 0.3s ease;
-}
-
-.btn-orange-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-.btn-orange-secondary {
-  background: transparent;
-  color: #FF6B35;
-  font-weight: 700;
-  border: 2px solid #FF6B35;
-  transition: all 0.3s ease;
-}
-
-.btn-orange-secondary:hover {
-  background: #FF6B35;
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
-}
 
 /* Hide scrollbars but keep functionality */
 * {
@@ -131,7 +61,7 @@ input, textarea, [contenteditable] {
   -moz-user-select: text;
   -ms-user-select: text;
   user-select: text;
-  caret-color: #FF6B35;
+  caret-color: #1B365D;
 }
 
 /* Smooth scrolling */
