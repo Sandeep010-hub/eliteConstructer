@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { XMarkIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { StarIcon } from '@heroicons/react/24/solid';
 import { Section } from '../ui/Section';
+import { Button } from '../ui/Button';
 import { projects } from '../../data/projects';
 import { Project } from '../../types';
 
@@ -13,7 +14,11 @@ const categories = [
   { id: 'commercial', name: 'Commercial' }
 ];
 
-export const Portfolio: React.FC = () => {
+interface PortfolioProps {
+  setCurrentPage?: (page: string) => void;
+}
+
+export const Portfolio: React.FC<PortfolioProps> = ({ setCurrentPage }) => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -49,6 +54,14 @@ export const Portfolio: React.FC = () => {
     }
   };
 
+  const handleGetQuote = () => {
+    closeModal();
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <Section id="portfolio" padding="xl">
       <div className="text-center mb-16">
@@ -73,10 +86,10 @@ export const Portfolio: React.FC = () => {
           <button
             key={category.id}
             onClick={() => setActiveCategory(category.id)}
-            className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
+            className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105 ${
               activeCategory === category.id
                 ? 'bg-navy-900 text-white shadow-lg'
-                : 'bg-white text-gray-700 hover:bg-navy-50 border border-gray-200'
+                : 'bg-white text-gray-700 hover:bg-navy-50 border border-gray-200 hover:border-navy-200'
             }`}
           >
             {category.name}
@@ -98,7 +111,7 @@ export const Portfolio: React.FC = () => {
               className="group cursor-pointer"
               onClick={() => openModal(project)}
             >
-              <div className="relative overflow-hidden rounded-lg shadow-lg">
+              <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-500">
                 <img
                   src={project.image}
                   alt={project.title}
@@ -108,12 +121,27 @@ export const Portfolio: React.FC = () => {
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                     <h3 className="text-xl font-bold mb-2">{project.title}</h3>
                     <p className="text-sm opacity-90">{project.location} • {project.year}</p>
+                    <div className="mt-2 text-xs bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 inline-block">
+                      Click to view details
+                    </div>
                   </div>
                 </div>
               </div>
             </motion.div>
           ))}
         </AnimatePresence>
+      </div>
+
+      {/* View More Button */}
+      <div className="text-center mt-12">
+        <Button 
+          variant="secondary" 
+          size="lg"
+          className="hover:scale-105 transition-transform"
+          onClick={handleGetQuote}
+        >
+          Start Your Project Today
+        </Button>
       </div>
 
       {/* Project Modal */}
@@ -138,7 +166,7 @@ export const Portfolio: React.FC = () => {
                 <h3 className="text-2xl font-bold text-navy-900">{selectedProject.title}</h3>
                 <button
                   onClick={closeModal}
-                  className="text-gray-500 hover:text-gray-700"
+                  className="text-gray-500 hover:text-gray-700 p-2 hover:bg-gray-100 rounded-full transition-colors"
                 >
                   <XMarkIcon className="w-6 h-6" />
                 </button>
@@ -164,13 +192,13 @@ export const Portfolio: React.FC = () => {
                           <>
                             <button
                               onClick={prevImage}
-                              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg"
+                              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all hover:scale-110"
                             >
                               <ChevronLeftIcon className="w-6 h-6" />
                             </button>
                             <button
                               onClick={nextImage}
-                              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg"
+                              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all hover:scale-110"
                             >
                               <ChevronRightIcon className="w-6 h-6" />
                             </button>
@@ -179,8 +207,8 @@ export const Portfolio: React.FC = () => {
                                 <button
                                   key={index}
                                   onClick={() => setCurrentImageIndex(index)}
-                                  className={`w-3 h-3 rounded-full ${
-                                    index === currentImageIndex ? 'bg-white' : 'bg-white/50'
+                                  className={`w-3 h-3 rounded-full transition-all ${
+                                    index === currentImageIndex ? 'bg-white scale-125' : 'bg-white/50 hover:bg-white/75'
                                   }`}
                                 />
                               ))}
@@ -224,6 +252,15 @@ export const Portfolio: React.FC = () => {
                       <p className="text-gray-600 text-sm leading-relaxed">
                         {selectedProject.description}
                       </p>
+                    </div>
+
+                    <div className="mt-6">
+                      <Button 
+                        className="w-full hover:scale-105 transition-transform"
+                        onClick={handleGetQuote}
+                      >
+                        Get Quote for Similar Project
+                      </Button>
                     </div>
                   </div>
 

@@ -27,9 +27,9 @@ function App() {
       case 'home':
         return (
           <>
-            <Hero />
-            <Services />
-            <Portfolio />
+            <Hero setCurrentPage={setCurrentPage} />
+            <Services setCurrentPage={setCurrentPage} />
+            <Portfolio setCurrentPage={setCurrentPage} />
             <About />
             <Testimonials />
             <Blog />
@@ -37,7 +37,7 @@ function App() {
           </>
         );
       case 'services':
-        return <Services />;
+        return <Services setCurrentPage={setCurrentPage} />;
       case 'custom-homes':
         return <CustomHomes />;
       case 'renovations':
@@ -45,7 +45,7 @@ function App() {
       case 'commercial':
         return <Commercial />;
       case 'portfolio':
-        return <Portfolio />;
+        return <Portfolio setCurrentPage={setCurrentPage} />;
       case 'about':
         return <About />;
       case 'process':
@@ -65,9 +65,9 @@ function App() {
       case 'terms':
         return <Terms />;
       case 'sitemap':
-        return <Sitemap />;
+        return <Sitemap setCurrentPage={setCurrentPage} />;
       default:
-        return <NotFound />;
+        return <NotFound setCurrentPage={setCurrentPage} />;
     }
   };
 

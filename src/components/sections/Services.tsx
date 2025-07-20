@@ -30,12 +30,42 @@ const categories = [
   { id: 'specialty', name: 'Specialty' }
 ];
 
-export const Services: React.FC = () => {
+interface ServicesProps {
+  setCurrentPage?: (page: string) => void;
+}
+
+export const Services: React.FC<ServicesProps> = ({ setCurrentPage }) => {
   const [activeCategory, setActiveCategory] = useState('all');
 
   const filteredServices = activeCategory === 'all' 
     ? services 
     : services.filter(service => service.category === activeCategory);
+
+  const handleServiceClick = (serviceTitle: string) => {
+    if (setCurrentPage) {
+      if (serviceTitle.includes('Custom Home')) {
+        setCurrentPage('custom-homes');
+      } else if (serviceTitle.includes('Renovation') || serviceTitle.includes('Kitchen') || serviceTitle.includes('Bathroom')) {
+        setCurrentPage('renovations');
+      } else if (serviceTitle.includes('Commercial')) {
+        setCurrentPage('commercial');
+      } else {
+        // Scroll to contact for other services
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <Section id="services" background="gray" padding="xl">
@@ -61,10 +91,10 @@ export const Services: React.FC = () => {
           <button
             key={category.id}
             onClick={() => setActiveCategory(category.id)}
-            className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
+            className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105 ${
               activeCategory === category.id
                 ? 'bg-navy-900 text-white shadow-lg'
-                : 'bg-white text-gray-700 hover:bg-navy-50 border border-gray-200'
+                : 'bg-white text-gray-700 hover:bg-navy-50 border border-gray-200 hover:border-navy-200'
             }`}
           >
             {category.name}
@@ -85,13 +115,13 @@ export const Services: React.FC = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card hover className="h-full">
+              <Card hover className="h-full group">
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-navy-900 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <div className="w-16 h-16 bg-navy-900 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                     <IconComponent className="w-8 h-8 text-gold-500" />
                   </div>
                   
-                  <h3 className="text-xl font-bold text-navy-900 mb-3">
+                  <h3 className="text-xl font-bold text-navy-900 mb-3 group-hover:text-gold-600 transition-colors">
                     {service.title}
                   </h3>
                   
@@ -113,15 +143,10 @@ export const Services: React.FC = () => {
                   <Button 
                     variant="secondary" 
                     size="sm" 
-                    className="w-full"
-                    onClick={() => {
-                      const contactSection = document.getElementById('contact');
-                      if (contactSection) {
-                        contactSection.scrollIntoView({ behavior: 'smooth' });
-                      }
-                    }}
+                    className="w-full hover:scale-105 transition-transform"
+                    onClick={() => handleServiceClick(service.title)}
                   >
-                    Get Quote
+                    Learn More
                   </Button>
                 </div>
               </Card>
@@ -177,14 +202,31 @@ export const Services: React.FC = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="text-center h-full">
-                <div className="text-4xl mb-4">{benefit.icon}</div>
+              <Card className="text-center h-full hover:shadow-xl transition-shadow group">
+                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">{benefit.icon}</div>
                 <h4 className="text-lg font-bold text-navy-900 mb-3">{benefit.title}</h4>
                 <p className="text-gray-600 text-sm">{benefit.description}</p>
               </Card>
             </motion.div>
           ))}
         </div>
+      </div>
+
+      {/* CTA Section */}
+      <div className="mt-16 text-center">
+        <Card className="bg-navy-900 text-white">
+          <h3 className="text-2xl font-bold mb-4">Ready to Start Your Project?</h3>
+          <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+            Get a free consultation and detailed quote for your construction or renovation project.
+          </p>
+          <Button 
+            size="lg" 
+            className="bg-gold-500 hover:bg-gold-600 text-navy-900 hover:scale-105 transition-transform"
+            onClick={scrollToContact}
+          >
+            Get Free Quote Today
+          </Button>
+        </Card>
       </div>
     </Section>
   );

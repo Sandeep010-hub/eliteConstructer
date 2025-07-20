@@ -26,7 +26,6 @@ const footerNavigation = {
   legal: [
     { name: 'Privacy Policy', href: 'privacy' },
     { name: 'Terms of Service', href: 'terms' },
-    { name: 'Sitemap', href: 'sitemap' },
   ],
 };
 
@@ -40,6 +39,16 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const scrollToSection = (sectionId: string) => {
+    setCurrentPage('home');
+    setTimeout(() => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
+
   return (
     <footer className="bg-navy-900 text-white">
       <Container>
@@ -48,10 +57,10 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
             {/* Company Info */}
             <div className="lg:col-span-2">
               <div 
-                className="flex items-center space-x-2 mb-6 cursor-pointer"
+                className="flex items-center space-x-3 mb-6 cursor-pointer group"
                 onClick={() => handleNavigation('home')}
               >
-                <div className="w-10 h-10 bg-gold-500 rounded-lg flex items-center justify-center">
+                <div className="w-12 h-12 bg-gold-500 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
                   <span className="text-navy-900 font-bold text-xl">E</span>
                 </div>
                 <div>
@@ -59,18 +68,24 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
                   <div className="text-sm text-gray-300">& Design</div>
                 </div>
               </div>
-              <p className="text-gray-300 mb-6 max-w-md">
+              <p className="text-gray-300 mb-6 max-w-md leading-relaxed">
                 Crafting exceptional spaces since 1995. We deliver premium construction and renovation services with uncompromising quality and attention to detail.
               </p>
               <div className="space-y-3">
-                <div className="flex items-center">
-                  <PhoneIcon className="w-5 h-5 mr-3 text-gold-500" />
+                <a 
+                  href="tel:+1-555-0123"
+                  className="flex items-center hover:text-gold-500 transition-colors group"
+                >
+                  <PhoneIcon className="w-5 h-5 mr-3 text-gold-500 group-hover:scale-110 transition-transform" />
                   <span>(555) 123-4567</span>
-                </div>
-                <div className="flex items-center">
-                  <EnvelopeIcon className="w-5 h-5 mr-3 text-gold-500" />
+                </a>
+                <a 
+                  href="mailto:info@eliteconstruction.com"
+                  className="flex items-center hover:text-gold-500 transition-colors group"
+                >
+                  <EnvelopeIcon className="w-5 h-5 mr-3 text-gold-500 group-hover:scale-110 transition-transform" />
                   <span>info@eliteconstruction.com</span>
-                </div>
+                </a>
                 <div className="flex items-center">
                   <MapPinIcon className="w-5 h-5 mr-3 text-gold-500" />
                   <span>123 Construction Ave, Los Angeles, CA 90210</span>
@@ -85,8 +100,14 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
                 {footerNavigation.services.map((item) => (
                   <li key={item.name}>
                     <button 
-                      onClick={() => handleNavigation(item.href)}
-                      className="text-gray-300 hover:text-gold-500 transition-colors text-left"
+                      onClick={() => {
+                        if (item.href === 'services') {
+                          scrollToSection('services');
+                        } else {
+                          handleNavigation(item.href);
+                        }
+                      }}
+                      className="text-gray-300 hover:text-gold-500 transition-colors text-left hover:translate-x-1 transform duration-200"
                     >
                       {item.name}
                     </button>
@@ -102,8 +123,14 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
                 {footerNavigation.company.map((item) => (
                   <li key={item.name}>
                     <button 
-                      onClick={() => handleNavigation(item.href)}
-                      className="text-gray-300 hover:text-gold-500 transition-colors text-left"
+                      onClick={() => {
+                        if (['about', 'portfolio', 'testimonials'].includes(item.href)) {
+                          scrollToSection(item.href);
+                        } else {
+                          handleNavigation(item.href);
+                        }
+                      }}
+                      className="text-gray-300 hover:text-gold-500 transition-colors text-left hover:translate-x-1 transform duration-200"
                     >
                       {item.name}
                     </button>
@@ -119,8 +146,14 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
                 {footerNavigation.resources.map((item) => (
                   <li key={item.name}>
                     <button 
-                      onClick={() => handleNavigation(item.href)}
-                      className="text-gray-300 hover:text-gold-500 transition-colors text-left"
+                      onClick={() => {
+                        if (['blog', 'about'].includes(item.href)) {
+                          scrollToSection(item.href);
+                        } else {
+                          handleNavigation(item.href);
+                        }
+                      }}
+                      className="text-gray-300 hover:text-gold-500 transition-colors text-left hover:translate-x-1 transform duration-200"
                     >
                       {item.name}
                     </button>
@@ -142,7 +175,7 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
                 <button
                   key={item.name}
                   onClick={() => handleNavigation(item.href)}
-                  className="text-gray-300 hover:text-gold-500 transition-colors text-sm"
+                  className="text-gray-300 hover:text-gold-500 transition-colors text-sm hover:underline"
                 >
                   {item.name}
                 </button>

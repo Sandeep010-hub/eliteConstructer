@@ -23,7 +23,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) =
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 100);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -36,19 +36,37 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) =
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const scrollToSection = (sectionId: string) => {
+    if (currentPage !== 'home') {
+      setCurrentPage('home');
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    setMobileMenuOpen(false);
+  };
+
   return (
     <header className={`fixed w-full z-50 transition-all duration-500 ${
-      scrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
+      scrolled ? 'bg-white/95 backdrop-blur-md shadow-lg py-2' : 'bg-transparent py-4'
     }`}>
       <Container>
-        <nav className="flex items-center justify-between py-4">
+        <nav className="flex items-center justify-between">
           {/* Logo */}
           <div 
-            className="flex items-center cursor-pointer"
+            className="flex items-center cursor-pointer group"
             onClick={() => handleNavigation('home')}
           >
-            <div className="flex items-center space-x-2">
-              <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors duration-300 ${
+            <div className="flex items-center space-x-3">
+              <div className={`w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-105 ${
                 scrolled ? 'bg-navy-900' : 'bg-white/20 backdrop-blur-sm'
               }`}>
                 <span className={`font-bold text-xl transition-colors duration-300 ${
@@ -71,8 +89,14 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) =
             {navigation.map((item) => (
               <button
                 key={item.name}
-                onClick={() => handleNavigation(item.href)}
-                className={`font-medium transition-all duration-300 relative group ${
+                onClick={() => {
+                  if (item.href === 'services' || item.href === 'portfolio' || item.href === 'about' || item.href === 'blog' || item.href === 'contact') {
+                    scrollToSection(item.href);
+                  } else {
+                    handleNavigation(item.href);
+                  }
+                }}
+                className={`font-medium transition-all duration-300 relative group px-2 py-1 ${
                   scrolled ? 'text-gray-700 hover:text-navy-900' : 'text-white hover:text-gold-500'
                 } ${currentPage === item.href ? (scrolled ? 'text-navy-900' : 'text-gold-500') : ''}`}
               >
@@ -88,15 +112,22 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) =
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center space-x-4">
-            <a href="tel:+1-555-0123" className={`flex items-center transition-colors duration-300 ${
-              scrolled ? 'text-navy-900 hover:text-gold-500' : 'text-white hover:text-gold-500'
-            }`}>
+            <a 
+              href="tel:+1-555-0123" 
+              className={`flex items-center transition-colors duration-300 hover:scale-105 ${
+                scrolled ? 'text-navy-900 hover:text-gold-500' : 'text-white hover:text-gold-500'
+              }`}
+            >
               <PhoneIcon className="w-5 h-5 mr-2" />
               <span className="font-semibold">(555) 123-4567</span>
             </a>
             <Button 
-              onClick={() => handleNavigation('contact')}
-              className={scrolled ? '' : 'bg-gold-500 hover:bg-gold-600 text-navy-900'}
+              onClick={() => scrollToSection('contact')}
+              className={`transition-all duration-300 hover:scale-105 ${
+                scrolled 
+                  ? 'bg-navy-900 hover:bg-navy-800 text-white' 
+                  : 'bg-gold-500 hover:bg-gold-600 text-navy-900'
+              }`}
             >
               Get Free Quote
             </Button>
@@ -106,7 +137,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) =
           <div className="lg:hidden">
             <button
               type="button"
-              className={`transition-colors duration-300 ${
+              className={`transition-colors duration-300 p-2 rounded-lg hover:bg-white/10 ${
                 scrolled ? 'text-gray-700' : 'text-white'
               }`}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -122,29 +153,38 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) =
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-gray-200/20 py-4 bg-white/95 backdrop-blur-md rounded-b-lg">
-            <div className="space-y-4">
+          <div className="lg:hidden mt-4 pb-4 bg-white/95 backdrop-blur-md rounded-lg shadow-lg">
+            <div className="space-y-2 px-4 py-4">
               {navigation.map((item) => (
                 <button
                   key={item.name}
-                  onClick={() => handleNavigation(item.href)}
-                  className={`block w-full text-left font-medium py-2 transition-colors duration-300 ${
+                  onClick={() => {
+                    if (item.href === 'services' || item.href === 'portfolio' || item.href === 'about' || item.href === 'blog' || item.href === 'contact') {
+                      scrollToSection(item.href);
+                    } else {
+                      handleNavigation(item.href);
+                    }
+                  }}
+                  className={`block w-full text-left font-medium py-3 px-2 rounded-lg transition-colors duration-300 ${
                     currentPage === item.href 
-                      ? 'text-navy-900 font-bold' 
-                      : 'text-gray-700 hover:text-navy-900'
+                      ? 'text-navy-900 font-bold bg-gold-100' 
+                      : 'text-gray-700 hover:text-navy-900 hover:bg-gray-100'
                   }`}
                 >
                   {item.name}
                 </button>
               ))}
               <div className="pt-4 border-t border-gray-200">
-                <a href="tel:+1-555-0123" className="flex items-center text-navy-900 mb-4">
+                <a 
+                  href="tel:+1-555-0123" 
+                  className="flex items-center text-navy-900 mb-4 p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                >
                   <PhoneIcon className="w-5 h-5 mr-2" />
                   <span className="font-semibold">(555) 123-4567</span>
                 </a>
                 <Button 
                   className="w-full"
-                  onClick={() => handleNavigation('contact')}
+                  onClick={() => scrollToSection('contact')}
                 >
                   Get Free Quote
                 </Button>
