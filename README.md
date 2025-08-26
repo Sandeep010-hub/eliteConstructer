@@ -149,14 +149,8 @@ VITE_GOOGLE_ANALYTICS_ID=G-XXXXXXX
 
 ---
 
-## 📜 License
-
-This project is licensed under the MIT License.
-
----
-
 ## 👤 Author
 
 **Yaswanth Sai Sandeep Kalagatla**  
 📧 saisandeepkalagatla@gmail.com  
-🔗 [GitHub](https://github.com/Sandeep010-hub) | [LinkedIn](https://linkedin.com/in/saisandeepkalagatla)
+[LinkedIn](https://linkedin.com/in/saisandeepkalagatla)
